@@ -1,6 +1,6 @@
 <h1>Profile</h1><br><br>
 {{#with user}}
-  
+
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
     <div class="col-md-4">
@@ -8,15 +8,9 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h6
-         class="card-text" type="text" name="username" >Username: {{ username }}</h6
-        >
-        <h6
-         class="card-text" type="text" name="course" >Course: {{ course }}</h6
-        >
-        <h6
-         class="card-text" type="text" name="location" >Location: {{ location }} </h6
-        >
+        <h6 class="card-text" type="text" name="username">Username: {{ username }}</h6>
+        <h6 class="card-text" type="text" name="course">Course: {{ course }}</h6>
+        <h6 class="card-text" type="text" name="location">Location: {{ location }} </h6>
         <p class="card-text"><small class="text-muted">Last updated {{ updatedAt }}</small></p>
       </div>
     </div>
@@ -24,5 +18,22 @@
 </div>
 
 {{/with}}
+
+<div class="d-inline-flex p-2 bd-highlight flex-column">
+
+  {{#each userProjects}}
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    Title: {{title}} <br>
+    Describtion: {{describtion}}<br>
+    {{deadline}}<br>
+    {{lookingFor}}<br>
+    {{owner}}<br>
+
+    <button type="button" class="btn btn-info rounded-pill">Apply</button>
+
+  </div>
+  {{/each}}
+</div>
+
 
 <a href="/profile/edit">Edit profile</a>
