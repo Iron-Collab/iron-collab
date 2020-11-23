@@ -5,28 +5,41 @@
 
   <div class="form-row">
     <div class="col-md-6 mb-3">
-      <label for="username">Username: </label>
-      <input id="username" class="form-control" type="text" name="username" value={{ username }} required>
+      <label for="email">Email: </label>
+      <input id="email" class="form-control" type="email" name="email" value={{ email }} required>
     </div>
   </div><br>
+
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="name">Name: </label>
+      <input id="name" class="form-control" type="text" name="name" value={{ name }}>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label for="lastName">Last Name: </label>
+      <input id="lastName" class="form-control" type="text" name="lastName" value={{ lastName }}>
+    </div>
+  </div><br>
+
+{{/with}}
 
   <div class="form-row">
     <div class="col-md-6 mb-3">
       <label for="course">Course: </label>
       <select name="course" id="course" class="custom-select">
-        <option value="Web Development">Web Development</option>
+        {{!-- <option value="Web Development">Web Development</option>
         <option value="UX/UI Design">UX/UI Design</option>
         <option value="Data Analytics">Data Analytics</option>
-        <option value="Cybersecurity">Cybersecurity</option>
+        <option value="Cybersecurity">Cybersecurity</option> --}}
+        {{{ optionsCourse }}}
       </select>
     </div>
-  </div><br>
 
-  <div class="form-row">
     <div class="col-md-6 mb-3">
       <label for="location">Location: </label>
       <select name="location" id="location" class="custom-select">
-        <option value="Amsterdam">Amsterdam</option>
+        {{!-- <option value="Amsterdam">Amsterdam</option>
         <option value="Barcelona">Barcelona</option>
         <option value="Berlin">Berlin</option>
         <option value="Lisbon">Lisbon</option>
@@ -35,16 +48,23 @@
         <option value="Miami">Miami</option>
         <option value="Paris">Paris</option>
         <option value="Sao Paulo">Sao Paulo</option>
-        <option value="Remote">Remote</option>
+        <option value="Remote">Remote</option> --}}
+        {{{ optionsLocation }}}
       </select>
     </div>
   </div><br><br>
 
-    {{#if message}}
-        <p style="color: red">{{message}}</p>
-    {{/if}}
+  <div class="custom-file mb-3">
+    <label for="profilePicture">Profile picture: </label>
+    <input type="file" class="custom-file-input" id="profilePicture" >
+    <label class="custom-file-label" for="profilePicture">Choose file...</label>
+    {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
+  </div>
 
-    <button class="btn btn-primary" type="submit">Save</button>
+  {{#if message}}
+      <p style="color: red">{{message}}</p>
+  {{/if}}
+
+  <button class="btn btn-primary" type="submit">Save</button>
 
 </form>
-{{/with}}

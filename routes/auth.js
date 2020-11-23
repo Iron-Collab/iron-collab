@@ -28,7 +28,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 )
 
 router.post('/google', passport.authenticate('local', { 
-  successRedirect: '/', 
+  successRedirect: '/profile', 
   failureRedirect: '/login'
   })
 )
@@ -43,18 +43,20 @@ router.post(
 );
 
 router.post('/signup', uploader.single('photo'), (req, res, next) => {
-  const { username, password, course, location, profilePicture } = req.body;
+
+  const { email, password, name, lastName, course, location, profilePicture } = req.body;
   if (password.length < 8) {
     return res.render('auth/signup', { message: 'Password must be at least 8 characters' });
   }
-  User.findOne( { username })
+  User.findOne( { email })
   .then((user) => {
     if (user !== null) {
-      return res.render('auth/signup', { message: 'This username has already been taken' });
+      return res.render('auth/signup', { message: 'This email has already been taken' });
     } else {
       const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(password, salt);
-      User.create( { username, password: hash, course, location, profilePicture })
+      console.log('req.file', req.file)
+      User.create( { email, password: hash, name, lastName, course, location, profilePicture: req.file.path })
       .then(dbUser => {
         req.login(dbUser, err => {
           if (err) {

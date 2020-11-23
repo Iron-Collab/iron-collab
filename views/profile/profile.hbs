@@ -8,21 +8,17 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h6
-         class="card-text" type="text" name="username" >Username: {{ username }}</h6
-        >
-        <h6
-         class="card-text" type="text" name="course" >Course: {{ course }}</h6
-        >
-        <h6
-         class="card-text" type="text" name="location" >Location: {{ location }} </h6
-        >
+        <h6 class="card-text" name="email" >Email: {{ email }}</h6>
+        <h6 class="card-text" name="name" >First Name: {{ name }}</h6>
+        <h6 class="card-text" name="lastName" >Last Name: {{ lastName }}</h6>
+        <h6 class="card-text" name="course" >Course: {{ course }}</h6>
+        <h6 class="card-text" name="location" >Location: {{ location }} </h6>
         <p class="card-text"><small class="text-muted">Last updated {{ updatedAt }}</small></p>
       </div>
     </div>
   </div>
 </div>
 
-{{/with}}
+<a href="/profile/{{ id }}/edit">Edit profile</a>
 
-<a href="/profile/edit">Edit profile</a>
+{{/with}}
