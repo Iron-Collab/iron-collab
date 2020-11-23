@@ -1,20 +1,32 @@
-<h1>Welcome!</h1><br><br>
+<h1>Welcome Ironhacker!</h1><br><br>
 <h6>To set up an account, fill out the following information:</h6><br><br>
 
-<form action="/signup" method="POST">
+<form action="/signup" method="POST" enctype="multipart/form-data">
 
     <div class="form-row">
       <div class="col-md-6 mb-3">
-        <label for="username">Username: </label>
-        <input id="username" class="form-control" type="text" name="username" required>
+        <label for="email">Email*: </label>
+        <input id="email" class="form-control" type="email" name="email" required>
       </div>
   
       <div class="col-md-6 mb-3">
-        <label for="password">Password: </label>
+        <label for="password">Password*: </label>
         <input id="password" class="form-control" type="password" name="password" aria-describedby="passwordHelpBlock" required>
         <small id="passwordHelpBlock" class="form-text text-muted">
           Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
         </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="name">Name: </label>
+        <input id="name" class="form-control" type="text" name="name" >
+      </div>
+  
+      <div class="col-md-6 mb-3">
+        <label for="lastName">Last Name: </label>
+        <input id="lastName" class="form-control" type="text" name="lastName" >
       </div>
     </div><br>
 
@@ -47,7 +59,7 @@
     </div><br><br>
 
     <div class="custom-file mb-3">
-      <input type="file" class="custom-file-input" id="profilePicture" >
+      <input type="file" class="custom-file-input" id="profilePicture" name="photo" >
       <label class="custom-file-label" for="profilePicture">Choose file...</label>
       {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
     </div><br><br><br>
