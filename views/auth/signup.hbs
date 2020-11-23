@@ -46,8 +46,11 @@
       </div>
     </div><br><br>
 
-    {{!-- <label for="profile">Profile picture: </label>
-    <input id="profile" type="text" name="profile"><br> --}}
+    <div class="custom-file mb-3">
+      <input type="file" class="custom-file-input" id="profilePicture" >
+      <label class="custom-file-label" for="profilePicture">Choose file...</label>
+      {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
+    </div><br><br><br>
 
     {{#if message}}
         <p style="color: red">{{message}}</p>

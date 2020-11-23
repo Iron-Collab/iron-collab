@@ -3,6 +3,8 @@ const router = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const { uploader, cloudinary } = require('../config/cloudinary');
+
 
 router.get('/signup', (req, res) => res.render('auth/signup'));
 router.get('/login', (req, res) => res.render('auth/login'));
@@ -18,8 +20,6 @@ router.get('/google', passport.authenticate("google", {
     "https://www.googleapis.com/auth/userinfo.email"
   ]
 }))
-
-
 
 router.get('/auth/google/callback', passport.authenticate('google', { 
     successRedirect: '/', 
@@ -42,8 +42,8 @@ router.post(
   })
 );
 
-router.post('/signup', (req, res, next) => {
-  const { username, password, course, location } = req.body;
+router.post('/signup', uploader.single('photo'), (req, res, next) => {
+  const { username, password, course, location, profilePicture } = req.body;
   if (password.length < 8) {
     return res.render('auth/signup', { message: 'Password must be at least 8 characters' });
   }
@@ -54,7 +54,7 @@ router.post('/signup', (req, res, next) => {
     } else {
       const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(password, salt);
-      User.create( { username, password: hash, course, location })
+      User.create( { username, password: hash, course, location, profilePicture })
       .then(dbUser => {
         req.login(dbUser, err => {
           if (err) {

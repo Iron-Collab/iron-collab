@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
-const passport = require('passport');
+const { uploader, cloudinary } = require('../config/cloudinary');
+
 const ensureLogin = require('connect-ensure-login');
 
 router.get('/', (req, res) => {
@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 
 router.get('/edit', (req, res) => {
   const user = req.user;
+  
   res.render('profile/profileEdit', { user });
 });
 

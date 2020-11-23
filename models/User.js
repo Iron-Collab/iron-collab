@@ -5,7 +5,10 @@ const userSchema = new Schema({
   username: String,
   password: String,
   googleID: String,
-  profilePicture: String,
+  profilePicture: {
+    type: String,
+    default: 'images/profile.png'
+  },
   course: {
     type: String,
     enum: ['Web Development', 'UX/UI Design', 'Data Analytics', 'Cybersecurity']
