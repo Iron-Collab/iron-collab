@@ -1,0 +1,59 @@
+<div class="container shadow-lg p-3 mb-5 bg-white rounded">
+  <form class="" action="/new-project" method="POST">
+
+
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label id="title" class="input-group-text">Title:</label>
+      </div>
+      <input name="title" id="title" class="form-control" aria-label="With textarea"></input>
+    </div>
+    <br>
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label for="describtion" class="input-group-text">Describtion:</label>
+      </div>
+      <input name="describtion" id="describtion" class="form-control" aria-label="With textarea"></input>
+    </div>
+    <br>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label id="deadline" class="input-group-text">Deadline:</label>
+      </div>
+      <input name="deadline" id="deadline" class="form-control" aria-label="With textarea"></input>
+    </div>
+    <br>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="lookingFor">Looking for:</label>
+      </div>
+      <select class="custom-select" id="lookingFor" name="lookingFor">
+        <option selected>Choose...</option>
+        <option value="webDev">Software Developer</option>
+        <option value="ux-ui">Designer UX|UI o</option>
+        <option value="data">Data</option>
+      </select>
+    </div>
+
+    <br>
+
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile02">
+        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">
+          Upload sketches | pictures of your project idea </label>
+      </div>
+      <div class="input-group-append">
+        <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+      </div>
+    </div>
+    <br>
+
+    <button class="btn btn-info rounded-pill" type="submit">Create new Project</button>
+
+  </form>
+
+</div>
