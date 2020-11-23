@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: String,
+  email: String,
   password: String,
   googleID: String,
+  name: String,
+  lastName: String,
   profilePicture: {
     type: String,
     default: 'images/profile.png'
@@ -16,6 +18,11 @@ const userSchema = new Schema({
   location: {
     type: String,
     enum: ['Amsterdam', 'Barcelona', 'Berlin', 'Lisbon', 'Madrid', 'Mexico City', 'Miami', 'Paris', 'São Paulo', 'Remote']
+  },
+  role: { 
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
   }
 }, {
   timestamps: true
