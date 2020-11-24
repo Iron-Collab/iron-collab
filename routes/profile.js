@@ -5,8 +5,16 @@ const Project = require('../models/Project');
 const { uploader, cloudinary } = require('../config/cloudinary');
 const ensureLogin = require('connect-ensure-login');
 
-router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res) => {
-  User.findById(req.params.id).then((user, project) => res.render('profile/profile', { user }))
+// router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res) => {
+//   User.findById(req.params.id).then((user) => res.render('profile/profile', { user }))
+// });
+
+router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
+  const user = await User.findById(req.params.id);
+  console.log(req.params.id)
+  const project = await Project.findOne({ owner: [req.params.id] });
+  console.log('user', user, 'project', project)
+  res.render('profile/profile', { user, project })
 });
 
 router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
@@ -31,6 +39,11 @@ router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
     })
     .catch(err => next(err))
 });
+
+// router.get("/:id/my-projects", async (req, res) => {
+//   const projects = await Project.findById(req.params.id)
+//   res.render("profile/partials", { userProjects: found });
+// });
 
 router.post('/:id', uploader.single('photo'), async (req, res, next) => {
   const { email, name, lastName, course, location, website, github, profilePicture } = req.body;
