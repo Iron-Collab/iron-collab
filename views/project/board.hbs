@@ -1,36 +1,20 @@
 <h1 class="h1">Projects looking for a hire:</h1>
 
-<div class="d-inline-flex p-2 bd-highlight flex-column">
+<div class="d-inline-flex p-2 bd-highlight flex-wrap flex-column justify-content-around">
 
   {{#each allProjects}}
   <div class="shadow-lg p-3 mb-5 bg-white rounded">
     Title: {{title}} <br>
-    Describtion: {{describtion}}<br>
-    {{deadline}}<br>
-    {{lookingFor}}<br>
-    {{owner}}<br>
+    Looking for:{{lookingFor}}<br>
 
-    <button type="button" class="btn btn-info rounded-pill">Apply</button>
+    <a href="/project-details/{{_id}}">
+      <button type="button" class="btn btn-info rounded-pill">Learn More</button>
+    </a>
 
   </div>
   {{/each}}
 </div>
 
-<nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item active" aria-current="page">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
 
 
 <a href="/new-project"> <button type="button" class="btn btn-info rounded-pill">Add a new Project</button></a>

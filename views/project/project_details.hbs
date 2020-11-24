@@ -1,0 +1,18 @@
+<h1>Project Details</h1>
+
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+  {{#with projectDetails}}
+  Title: {{title}} <br>
+  Looking for:{{lookingFor}}<br>
+  Owner: {{owner}}<br>
+  Describtion: {{describtion}} <br>
+  Deadline: {{deadline}} <br>
+  Random line <br>
+
+  <a href="/">
+
+    <button type="button" class="btn btn-info rounded-pill">Apply</button>
+  </a>
+  <a href="/projects"><button type="button" class="btn btn-info rounded-pill">See all Projects</button></a>
+  {{/with}}
+</div>

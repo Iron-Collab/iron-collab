@@ -1,5 +1,15 @@
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener(
+//   "DOMContentLoaded",
+//   () => {
+//     console.log("IronGenerator JS imported successfully!");
+//   },
+//   false
+// );
 
-  console.log('IronGenerator JS imported successfully!');
+// const btnLearnMore = document.querySelector(
+//   "body > div > div:nth-child(1) > button"
+// );
 
-}, false);
+// btnLearnMore.addEventListener("click", function () {
+//   console.log("connected");
+// });

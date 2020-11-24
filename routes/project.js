@@ -13,9 +13,18 @@ router.get("/new-project", (req, res, next) => {
   res.render("project/new_project");
 });
 
+router.get("/project-details/:id", (req, res, next) => {
+  const projectId = req.params.id;
+  Project.findById(projectId)
+    .populate("owner")
+    .then((projectDetails) => {
+      console.log(projectDetails);
+      res.render("project/project_details", { projectDetails });
+    });
+});
+
 router.get("/my-projects", (req, res, next) => {
   const id = req.body.id;
-  console.log("body:", req.body);
   Project.find({ id })
     .then((found) => {
       res.render("profile/profile", { userProjects: found });
