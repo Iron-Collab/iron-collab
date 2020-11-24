@@ -11,6 +11,7 @@
         <option value="uxUi">UX | UI Designer</option>
         <option value="data">Data Analyst</option>
       </select>
+
       <label for="searchLoc" id="searchLoc"></label>
       <select name="searchLoc" class="custom-select" id="searchLoc">
         <option selected>Choose...</option>
@@ -21,9 +22,7 @@
 
       <div class="justify-content-center align-items-center">
         <button class="btn btn-info rounded-pill" type="Submit">Filter</button>
-
       </div>
-
 
     </form>
 
@@ -40,7 +39,7 @@
       Data Analyst: {{lookingFor.data}} <br>
 
 
-      <a href="/project-details/{{_id}}">
+      <a href="/projects/{{_id}}">
         <button type="button" class="btn btn-info rounded-pill">Learn More</button>
       </a>
 
@@ -50,4 +49,4 @@
 </div>
 
 <a href="/projects"> <button type="button" class="btn btn-info rounded-pill">See all Projects</button></a>
-<a href="/new-project"> <button type="button" class="btn btn-info rounded-pill">Add a new Project</button></a>
+<a href="/projects/new"> <button type="button" class="btn btn-info rounded-pill">Add a new Project</button></a>
