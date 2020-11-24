@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const User = require('../models/User');
 const Project = require('../models/Project');
@@ -35,9 +35,13 @@ router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
       optionsLocation += `<option value='${location}' ${selectedLocation}>${location}</option>`
     })
 
-    res.render('profile/profileEdit', { user, optionsCourse, optionsLocation });
+      res.render("profile/profileEdit", {
+        user,
+        optionsCourse,
+        optionsLocation,
+      });
     })
-    .catch(err => next(err))
+    .catch((err) => next(err));
 });
 
 // router.get("/:id/my-projects", async (req, res) => {
