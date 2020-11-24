@@ -40,8 +40,6 @@ router.get("/my-projects", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.post("/projects", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { searchBar, searchLoc } = req.body;
-
-  console.log("sb:", req.body, searchLoc, searchBar);
   const filtered = [];
   Project.find()
     .then((found) => {
