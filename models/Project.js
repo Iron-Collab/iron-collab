@@ -7,9 +7,14 @@ const projectSchema = new Schema(
     title: String,
     description: String,
     owner: [{ type: Schema.Types.ObjectId, ref: User }],
-    lookingFor: [String],
+    lookingFor: {
+      webDev: Number,
+      uxUi: Number,
+      data: Number,
+    },
     tags: [String],
     deadline: Date,
+    attachments: String,
     applicants: [{ type: Schema.Types.ObjectId, ref: User }],
     team: [{ type: Schema.Types.ObjectId, ref: User }],
     status: {

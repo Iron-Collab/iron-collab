@@ -1,6 +1,6 @@
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
 
-  <form class="" action="/projects" method="POST">
+  <form class="" action="/projects/new" method="POST">
 
     <div class="input-group">
       <div class="input-group-prepend">
@@ -32,30 +32,33 @@
       </div>
     </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="lookingFor">Looking for:</label>
-      </div>
-      <select class="custom-select" id="lookingFor" name="lookingFor">
-        <option selected>Choose...</option>
-        <option value="webDev">Software Developer</option>
-        <option value="ux-ui">Designer UX|UI o</option>
-        <option value="data">Data</option>
-      </select>
-    </div>
-    <br>
+</div>
 
-    <div class="input-group mb-3">
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="inputGroupFile02">
-        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">
-          Upload sketches | pictures of your project idea </label>
-      </div>
-    </div>
-    <br>
+<label for="webDev">Software Developer:</label>
+<input type="number" name="webDev" id="webDev" min="0" max="4">
 
-    <button class="btn btn-info rounded-pill" type="submit">Create new Project</button>
+<label for="uxUi">Designer UX | UI:</label>
+<input type="number" name="uxUi" id="uxUi" min="0" max="4">
 
-  </form>
+<label for="data">Data:</label>
+<input type="number" name="data" id="data" min="0" max="4">
+
+<br>
+
+<div class="input-group mb-3">
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile02">
+    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">
+      Upload sketches | pictures of your project idea </label>
+  </div>
+  <div class="input-group-append">
+    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+  </div>
+</div>
+<br>
+
+<button class="btn btn-info rounded-pill" type="submit">Create new Project</button>
+
+</form>
 
 </div>

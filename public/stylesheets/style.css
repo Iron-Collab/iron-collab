@@ -107,4 +107,12 @@ h1 {
 .collapsible-link[aria-expanded='true']::before {
   transform: rotate(180deg); }
 
+.searchBar {
+  width: 50vh;
+  margin-left: 25vh; }
+
+.filterBar {
+  display: flex;
+  flex-direction: row; }
+
 /*# sourceMappingURL=style.css.map */
