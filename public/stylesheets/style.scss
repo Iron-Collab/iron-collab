@@ -93,3 +93,13 @@ body{
   // text-align: center;
   justify-content: center;
 }
+
+.searchBar {
+  width: 50vh;
+  margin-left: 25vh;
+}
+
+.filterBar {
+  display: flex;
+  flex-direction: row;
+}
