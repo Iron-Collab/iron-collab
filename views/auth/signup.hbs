@@ -56,8 +56,21 @@
           <option value="Remote">Remote</option>
         </select>
       </div>
-    </div><br><br>
+    </div><br>
 
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="website">Website: </label>
+        <input id="website" class="form-control" type="text" name="website" value={{ website }}>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="github">GitHub: </label>
+        <input id="github" class="form-control" type="text" name="github" value={{ github }}>
+      </div>
+    </div><br>
+
+    <p> Profile picture: </p>
     <div class="custom-file mb-3">
       <input type="file" class="custom-file-input" id="profilePicture" name="photo" >
       <label class="custom-file-label" for="profilePicture">Choose file...</label>

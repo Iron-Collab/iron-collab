@@ -1,3 +1,16 @@
-{{#each userProjects}}
 
-{{/each}}
+<div class="d-inline-flex p-2 bd-highlight flex-column">
+
+  {{#each userProjects}}
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    Title: {{title}} <br>
+    Describtion: {{describtion}}<br>
+    {{deadline}}<br>
+    {{lookingFor}}<br>
+    {{owner}}<br>
+
+    <button type="button" class="btn btn-info rounded-pill">Apply</button>
+
+  </div>
+  {{/each}}
+</div>

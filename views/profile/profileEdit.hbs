@@ -1,7 +1,7 @@
 <h1>Edit profile</h1><br><br>
 
 {{#with user}}
-<form action="/profile/edit" method="POST">
+<form action="/profile/{{ id }}" method="POST" enctype="multipart/form-data">
 
   <div class="form-row">
     <div class="col-md-6 mb-3">
@@ -28,10 +28,6 @@
     <div class="col-md-6 mb-3">
       <label for="course">Course: </label>
       <select name="course" id="course" class="custom-select">
-        {{!-- <option value="Web Development">Web Development</option>
-        <option value="UX/UI Design">UX/UI Design</option>
-        <option value="Data Analytics">Data Analytics</option>
-        <option value="Cybersecurity">Cybersecurity</option> --}}
         {{{ optionsCourse }}}
       </select>
     </div>
@@ -39,27 +35,31 @@
     <div class="col-md-6 mb-3">
       <label for="location">Location: </label>
       <select name="location" id="location" class="custom-select">
-        {{!-- <option value="Amsterdam">Amsterdam</option>
-        <option value="Barcelona">Barcelona</option>
-        <option value="Berlin">Berlin</option>
-        <option value="Lisbon">Lisbon</option>
-        <option value="Madrid">Madrid</option>
-        <option value="Mexico City">Mexico City</option>
-        <option value="Miami">Miami</option>
-        <option value="Paris">Paris</option>
-        <option value="Sao Paulo">Sao Paulo</option>
-        <option value="Remote">Remote</option> --}}
         {{{ optionsLocation }}}
       </select>
     </div>
-  </div><br><br>
+  </div><br>
 
+{{#with user}}
+
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="website">Website: </label>
+      <input id="website" class="form-control" type="text" name="website" value={{ website }}>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label for="github">GitHub: </label>
+      <input id="github" class="form-control" type="text" name="github" value={{ github }}>
+    </div>
+  </div><br>
+
+  <p>Profile picture: </p>
   <div class="custom-file mb-3">
-    <label for="profilePicture">Profile picture: </label>
-    <input type="file" class="custom-file-input" id="profilePicture" >
-    <label class="custom-file-label" for="profilePicture">Choose file...</label>
+    <input type="file" class="custom-file-input" id="profilePicture" name="photo" value="{{ profilePicture.imgPath }}" placeholder="Choose file...">
+    <label class="custom-file-label" for="profilePicture">{{ profilePicture.imgPath }}</label>
     {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
-  </div>
+  </div><br><br>
 
   {{#if message}}
       <p style="color: red">{{message}}</p>
@@ -68,3 +68,5 @@
   <button class="btn btn-primary" type="submit">Save</button>
 
 </form>
+
+{{/with}}
