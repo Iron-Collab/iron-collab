@@ -8,7 +8,7 @@ const projectSchema = new Schema(
     description: String,
     owner: [{ type: Schema.Types.ObjectId, ref: User }],
     lookingFor: {
-      webDev: Number,
+      webdev: Number,
       uxUi: Number,
       data: Number,
     },

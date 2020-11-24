@@ -1,64 +1,64 @@
-<div class="container shadow-lg p-3 mb-5 bg-white rounded">
-
+<div class="container shadow-lg p-4 mt-4 mb-4 bg-white rounded">
+  <h1>Add a Project</h1><br>
   <form class="" action="/projects/new" method="POST">
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label id="title" class="input-group-text">Title:</label>
+    {{!-- TITLE & DEALINE --}}
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="title"><strong>Title: </strong></label>
+        <input id="title" class="form-control" type="title" name="title" >
       </div>
-      <input name="title" id="title" class="form-control" aria-label="With textarea"></input>
+  
+      <div class="col-md-6 mb-3">
+        <label for="datepicker"><strong>Deadline: </strong></label>
+        <input id="deadline" class="form-control" type="date" name="datepicker" >
+      </div>
+    </div><br>
+
+    {{!-- DESCRIPTION --}}
+    <div class="form-row">
+        <label for="description"><strong>Description: </strong></label>
+        <textarea id="description" class="form-control" type="title" name="description"></textarea>
+    </div><br>
+
+    {{!-- LOCATION & STATUS --}}
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="location"><strong>Location: </strong></label>
+        <select name="course" id="course" class="custom-select">
+          {{{ optionsLocation }}}
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label id="status"><strong>Status:</strong></label>
+        <select name="status" id="status" class="custom-select">
+          <option value="active" selected>Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
     </div>
     <br>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label for="description" class="input-group-text">Description:</label>
+  {{!-- LOOKING FOR --}}
+    <p><strong>Looking for ... to collaborate with:</strong></p>
+    <div class="form-row">
+      <div class="col-4 mb-3">
+        <label for="webdev" {{!-- class="input-group-text" --}}>Web Developer: </label>
+        <input class="form-control" type="number" name="webdev" id="webdev" min="0" max="4" >
       </div>
-      <textarea name="description" id="description" class="form-control" aria-label="With textarea"></textarea>
-    </div>
-    <br>
-
-    {{!-- <div class="input-group">
-      <div class="input-group-prepend">
-        <label id="deadline" class="input-group-text">Deadline:</label>
+      <div class="col-4 mb-3">
+        <label for="uxui" {{!-- class="input-group-text" --}}>UX/UI Designer: </label>
+        <input class="form-control" type="number" name="uxui" id="uxui" min="0" max="4" >
       </div>
-      <input name="deadline" id="deadline" class="form-control" aria-label="With textarea"></input>
-    </div>
-    <br> --}}
-    <div class="form-group mb-4">
-      <div class="datepicker date input-group p-0 shadow-sm">
-          <input type="text" class="form-control py-4 px-4" id="datepicker">
-          <div class="input-group-append"><span class="input-group-text px-4"><i class="fa fa-clock-o"></i></span></div>
+      <div class="col-4 mb-3">
+        <label for="data" {{!-- class="input-group-text" --}}>Data Analyst: </label>
+        <input class="form-control" type="number" name="data" id="data" min="0" max="4" >
       </div>
-    </div>
+    </div><br>
 
-</div>
+    {{!-- TEAM --}}
 
-<label for="webDev">Software Developer:</label>
-<input type="number" name="webDev" id="webDev" min="0" max="4">
 
-<label for="uxUi">Designer UX | UI:</label>
-<input type="number" name="uxUi" id="uxUi" min="0" max="4">
-
-<label for="data">Data:</label>
-<input type="number" name="data" id="data" min="0" max="4">
-
-<br>
-
-<div class="input-group mb-3">
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" id="inputGroupFile02">
-    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">
-      Upload sketches | pictures of your project idea </label>
-  </div>
-  <div class="input-group-append">
-    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
-  </div>
-</div>
-<br>
-
-<button class="btn btn-info rounded-pill" type="submit">Create new Project</button>
-
-</form>
-
+    <button class="btn btn-primary" type="submit">Add a project</button>
+  </form>
 </div>
