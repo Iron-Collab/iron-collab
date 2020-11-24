@@ -9,23 +9,35 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
-
-  {{#unless user}}
-    <nav class="nav nav-pills flex-column flex-sm-row">
-      <a class="flex-sm-fill text-sm-center nav-link" href="/signup">Sign up</a>
-      <a class="flex-sm-fill text-sm-center nav-link" href="/login">Login</a>
-    </nav>
+  {{#if user}}
+  <div class="nav">
+    <a href="/">Home</a>
+    <a href="/profile/{{ user.id }}">Profile</a>
+    <a href="/projects">Projects</a>
+    <a href="/my-projects">My projects</a>
+    <a href="/logout">Log Out</a>
+  </div>
   {{else}}
-    <nav class="nav nav-pills flex-column flex-sm-row">
+    <div class="nav">
+      <a href="/signup">Sign up</a>
+      <a href="/login">Login</a>
+    </div>
+  {{/if}}
+
+  {{!-- {{#if user}}
+      <nav class="nav nav-pills flex-column flex-sm-row">
       <a class="flex-sm-fill text-sm-center nav-link" href="/">Home</a>
-      <a class="flex-sm-fill text-sm-center nav-link" href="/profile">Profile</a>
+      <a class="flex-sm-fill text-sm-center nav-link" href="/profile/{{ user.id }}">Profile</a>
       <a class="flex-sm-fill text-sm-center nav-link" href="/projects">Projects</a>
       <a class="flex-sm-fill text-sm-center nav-link" href="/my-projects">My projects</a>
       <a class="flex-sm-fill text-sm-center nav-link" href="/logout">Log Out</a>
     </nav>
-  {{/unless}}
-
-
+  {{else}}
+    <nav class="nav nav-pills flex-column flex-sm-row">
+      <a class="flex-sm-fill text-sm-center nav-link" href="/signup">Sign up</a>
+      <a class="flex-sm-fill text-sm-center nav-link" href="/login">Login</a>
+    </nav>
+  {{/if}} --}}
 
   {{{body}}}
 

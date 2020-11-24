@@ -13,18 +13,6 @@ router.get("/new-project", (req, res, next) => {
   res.render("project/new_project");
 });
 
-router.get("/my-projects", (req, res, next) => {
-  const id = req.body.id;
-  console.log("body:", req.body);
-  Project.find({ id })
-    .then((found) => {
-      res.render("profile/profile", { userProjects: found });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
 router.post("/new-project", (req, res, next) => {
   const { title, describtion, deadline, lookingFor } = req.body;
   Project.create({

@@ -8,8 +8,11 @@ const userSchema = new Schema({
   name: String,
   lastName: String,
   profilePicture: {
-    type: String,
-    default: 'images/profile.png'
+    imgPath: {
+      type: String,
+      default: 'images/profile.png'
+    },
+    publicId: String,
   },
   course: {
     type: String,
@@ -23,7 +26,9 @@ const userSchema = new Schema({
     type: String,
     enum: ['user', 'admin'],
     default: 'user'
-  }
+  },
+  website: String,
+  github: String,
 }, {
   timestamps: true
 });
