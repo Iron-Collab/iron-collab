@@ -1,54 +1,47 @@
 const express = require("express");
 const router = express.Router();
 const Project = require("../models/Project");
+const ensureLogin = require('connect-ensure-login');
 
-router.get("/projects", (req, res, next) => {
+router.get("/projects", ensureLogin.ensureLoggedIn(), (req, res) => {
   Project.find().then((allProjects) => {
-    console.log(allProjects);
     res.render("project/board", { allProjects });
   });
 });
 
-router.get("/new-project", (req, res, next) => {
+router.get("/new-project", ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render("project/new_project");
 });
 
-router.get("/project-details/:id", (req, res, next) => {
-  const projectId = req.params.id;
-  Project.findById(projectId)
-    .populate("owner")
-    .then((projectDetails) => {
-      console.log(projectDetails);
-      res.render("project/project_details", { projectDetails });
+router.get("/projects/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
+  Project.findById(req.params.id).populate("owner")
+    .then((project) => {
+      res.render("project/project_details", { project });
     });
 });
 
-router.get("/my-projects", (req, res, next) => {
-  const id = req.body.id;
-  Project.find({ id })
-    .then((found) => {
-      res.render("profile/profile", { userProjects: found });
+router.get("/projects/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
+  Project.findById(req.params.id).populate('owner')
+    .then((project) => {
+      res.render("project/edit_project", { project });
     })
-    .catch((err) => {
-      console.log(err);
-    });
 });
 
-router.post("/new-project", (req, res, next) => {
-  const { title, describtion, deadline, lookingFor } = req.body;
-  Project.create({
-    title,
-    describtion,
-    deadline,
-    lookingFor,
-    owner: req.user,
-  })
-    .then((newProject) => {
-      console.log(newProject);
-      res.render("project/board", { newProject });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+router.get("/projects/:id/delete", ensureLogin.ensureLoggedIn(), (req, res) => {
+  Project.findByIdAndDelete(req.params.id)
+    .then(() => res.redirect("/projects"))
 });
+
+router.post("/projects", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const { title, description, deadline, lookingFor, tags } = req.body;
+  Project.create({ title, description, deadline, lookingFor, owner: req.user })
+  .then(() => res.redirect('projects'))
+});
+
+router.post("/projects/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const { title, description, deadline, lookingFor, tags, applicants, team } = req.body;
+  Project.findByIdAndUpdate(req.params.id, { title, description, lookingFor, tags, deadline, applicants, team })
+    .then(() => res.redirect('/projects'))
+});
+
 module.exports = router;

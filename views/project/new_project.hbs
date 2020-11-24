@@ -1,7 +1,6 @@
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-  <form class="" action="/new-project" method="POST">
 
-
+  <form class="" action="/projects" method="POST">
 
     <div class="input-group">
       <div class="input-group-prepend">
@@ -13,18 +12,25 @@
 
     <div class="input-group">
       <div class="input-group-prepend">
-        <label for="describtion" class="input-group-text">Describtion:</label>
+        <label for="description" class="input-group-text">Description:</label>
       </div>
-      <input name="describtion" id="describtion" class="form-control" aria-label="With textarea"></input>
+      <textarea name="description" id="description" class="form-control" aria-label="With textarea"></textarea>
     </div>
     <br>
-    <div class="input-group">
+
+    {{!-- <div class="input-group">
       <div class="input-group-prepend">
         <label id="deadline" class="input-group-text">Deadline:</label>
       </div>
       <input name="deadline" id="deadline" class="form-control" aria-label="With textarea"></input>
     </div>
-    <br>
+    <br> --}}
+    <div class="form-group mb-4">
+      <div class="datepicker date input-group p-0 shadow-sm">
+          <input type="text" class="form-control py-4 px-4" id="datepicker">
+          <div class="input-group-append"><span class="input-group-text px-4"><i class="fa fa-clock-o"></i></span></div>
+      </div>
+    </div>
 
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -37,7 +43,6 @@
         <option value="data">Data</option>
       </select>
     </div>
-
     <br>
 
     <div class="input-group mb-3">
@@ -45,9 +50,6 @@
         <input type="file" class="custom-file-input" id="inputGroupFile02">
         <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">
           Upload sketches | pictures of your project idea </label>
-      </div>
-      <div class="input-group-append">
-        <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
       </div>
     </div>
     <br>
