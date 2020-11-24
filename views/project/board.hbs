@@ -1,20 +1,53 @@
 <h1 class="h1">Projects looking for a hire:</h1>
+<div class="d-inline-flex p-2 bd-highlight flex-nowrap flex-column align-items-center">
 
-<div class="d-inline-flex p-2 bd-highlight flex-wrap flex-column justify-content-around">
+  <div class="d-inline-flex p-2 bd-highlight flex-nowrap flex-column shadow-lg">
+    <form action="/projects" method="POST">
 
-  {{#each allProjects}}
-  <div class="shadow-lg p-3 mb-5 bg-white rounded">
-    Title: {{title}} <br>
-    Looking for:{{lookingFor}}<br>
+      <label for="searchBar" id="searchBar"></label>
+      <select name="searchBar" class="custom-select" id="searchBar">
+        <option selected>Choose...</option>
+        <option value="webDev">Software Developer</option>
+        <option value="uxUi">UX | UI Designer</option>
+        <option value="data">Data Analyst</option>
+      </select>
+      <label for="searchLoc" id="seachLoc"></label>
+      <select name="seachLoc" class="custom-select" id="seachLoc">
+        <option selected>Choose...</option>
+        <option value="Berlin">Berlin</option>
+        <option value="Barcelona">Barcelona</option>
+        <option value="Miami">Miami</option>
+      </select>
 
-    <a href="/project-details/{{_id}}">
-      <button type="button" class="btn btn-info rounded-pill">Learn More</button>
-    </a>
+      <div class="justify-content-center align-items-center">
+        <button class="btn btn-info rounded-pill" type="Submit">Filter</button>
+
+      </div>
+
+
+    </form>
 
   </div>
-  {{/each}}
+
+  <div class="d-inline-flex p-2 bd-highlight flex-wrap flex-column justify-content-around">
+
+    {{#each allProjects}}
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+      Title: {{title}} <br>
+      Looking for: <br>
+      Software Developer: {{lookingFor.webDev}}<br>
+      UX | UI Designer: {{lookingFor.uxUi}} <br>
+      Data Analyst: {{lookingFor.data}} <br>
+
+
+      <a href="/project-details/{{_id}}">
+        <button type="button" class="btn btn-info rounded-pill">Learn More</button>
+      </a>
+
+    </div>
+    {{/each}}
+  </div>
 </div>
 
-
-
+<a href="/projects"> <button type="button" class="btn btn-info rounded-pill">See all Projects</button></a>
 <a href="/new-project"> <button type="button" class="btn btn-info rounded-pill">Add a new Project</button></a>

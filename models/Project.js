@@ -5,9 +5,13 @@ const User = require("./User");
 const projectSchema = new Schema(
   {
     title: String,
-    describtion: String,
+    description: String,
     owner: [{ type: Schema.Types.ObjectId, ref: User }],
-    lookingFor: String,
+    lookingFor: {
+      webDev: Number,
+      uxUi: Number,
+      data: Number,
+    },
     tags: String,
     deadline: Number,
     attachments: String,
