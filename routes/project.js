@@ -22,7 +22,6 @@ router.get(
     Project.findById(projectId)
       .populate("owner")
       .then((projectDetails) => {
-        console.log(projectDetails);
         res.render("project/project_details", { projectDetails });
       });
   }
@@ -40,7 +39,9 @@ router.get("/my-projects", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.post("/projects", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { searchBar } = req.body;
+  const { searchBar, searchLoc } = req.body;
+
+  console.log("sb:", req.body, searchLoc, searchBar);
   const filtered = [];
   Project.find()
     .then((found) => {
