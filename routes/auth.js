@@ -44,7 +44,7 @@ router.post(
 
 router.post('/signup', uploader.single('photo'), (req, res, next) => {
 
-  const { email, password, name, lastName, course, location, profilePicture } = req.body;
+  const { email, password, name, lastName, course, location, website, github, profilePicture } = req.body;
   if (password.length < 8) {
     return res.render('auth/signup', { message: 'Password must be at least 8 characters' });
   }
@@ -56,7 +56,7 @@ router.post('/signup', uploader.single('photo'), (req, res, next) => {
       const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(password, salt);
       console.log('req.file', req.file)
-      User.create( { email, password: hash, name, lastName, course, location, profilePicture: req.file.path })
+      User.create( { email, password: hash, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
       .then(dbUser => {
         req.login(dbUser, err => {
           if (err) {
