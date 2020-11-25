@@ -1,38 +1,38 @@
 {{#with project}}
 
-<div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
-  <h1>Edit Project</h1><br>
-  <form class="" action="/projects/{{ id }}" method="POST">
+  <div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
+    <h1>Edit Project</h1><br>
+    <form class="" action="/projects/{{ id }}" method="POST">
 
-    {{!-- TITLE & DEALINE --}}
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-        <label for="title"><strong>Title: </strong></label>
-        <input id="title" class="form-control" type="title" name="title" value="{{ title }}" >
-      </div>
-  
-      <div class="col-md-6 mb-3">
-        <label for="datepicker"><strong>Deadline: </strong></label>
-        <input id="deadline" class="form-control" type="date" name="datepicker" value="{{ deadline }}">
-      </div>
-    </div><br>
+      {{!-- TITLE & DEALINE --}}
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="title"><strong>Title: </strong></label>
+          <input id="title" class="form-control" type="text" name="title" value="{{ title }}" >
+        </div>
+    
+        <div class="col-md-6 mb-3">
+          <label for="datepicker"><strong>Deadline: </strong></label>
+          <input id="deadline" class="form-control" type="date" name="datepicker" value="{{ deadline }}">
+        </div>
+      </div><br>
 
-    {{!-- DESCRIPTION --}}
-    <div class="form-row">
-        <label for="description"><strong>Description: </strong></label>
-        <textarea id="description" class="form-control" type="title" name="description" value="{{ description }}" ></textarea>
-    </div><br>
+      {{!-- DESCRIPTION --}}
+      <div class="form-row">
+          <label for="description"><strong>Description: </strong></label>
+          <textarea id="description" class="form-control" type="text" name="description">{{ description }}</textarea>
+      </div><br>
 
 {{/with}}
 
-    {{!-- LOCATION & STATUS --}}
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-        <label for="location"><strong>Location:</strong></label>
-        <select name="course" id="course" class="custom-select">
-          {{{ optionsLocation }}}
-        </select>
-      </div>
+      {{!-- LOCATION & STATUS --}}
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="location"><strong>Location:</strong></label>
+          <select name="location" id="location" class="custom-select">
+            {{{ optionsLocation }}}
+          </select>
+        </div>
 
 {{#with project}}
 
@@ -46,29 +46,30 @@
     </div>
     <br>
 
-  {{!-- LOOKING FOR --}}
-    <p><strong>Looking for ... to collaborate with:</strong></p>
-    <div class="form-row">
-      <div class="col-4 mb-3">
-        <label for="webdev" {{!-- class="input-group-text" --}}>Web Developer: </label>
-        <input class="form-control" type="number" name="webdev" id="webdev" min="0" max="4" value="{{ lookingFor.webdev }}">
+      {{!-- LOOKING FOR --}}
+      <p><strong>Looking for ... to collaborate with:</strong></p>
+      <div class="form-row">
+        <div class="col-4 mb-3">
+          <label for="webdev" {{!-- class="input-group-text" --}}>Web Developer: </label>
+          <input class="form-control" type="number" name="webdev" id="webdev" min="0" max="4" value="{{ lookingFor.webdev }}">
+        </div>
+        <div class="col-4 mb-3">
+          <label for="uxui" {{!-- class="input-group-text" --}}>UX/UI Designer: </label>
+          <input class="form-control" type="number" name="uxui" id="uxui" min="0" max="4" value="{{ lookingFor.uxui }}">
+        </div>
+        <div class="col-4 mb-3">
+          <label for="data" {{!-- class="input-group-text" --}}>Data Analyst: </label>
+          <input class="form-control" type="number" name="data" id="data" min="0" max="4" value="{{ lookingFor.data }}">
+        </div>
       </div>
-      <div class="col-4 mb-3">
-        <label for="uxui" {{!-- class="input-group-text" --}}>UX/UI Designer: </label>
-        <input class="form-control" type="number" name="uxui" id="uxui" min="0" max="4" value="{{ lookingFor.uxui }}">
-      </div>
-      <div class="col-4 mb-3">
-        <label for="data" {{!-- class="input-group-text" --}}>Data Analyst: </label>
-        <input class="form-control" type="number" name="data" id="data" min="0" max="4" value="{{ lookingFor.data }}">
-      </div>
-    </div><br>
+      <br>
 
-    {{!-- TEAM --}}
+      {{!-- TEAM --}}
 
-    {{!-- APPLICANTS --}}
+      {{!-- APPLICANTS --}}
   
-    <button class="btn btn-primary" type="submit">Save changes</button>
-  </form>
-</div>
+      <button class="btn btn-primary" type="submit">Save changes</button>
 
+    </form>
+  </div>
 {{/with}}
