@@ -48,7 +48,8 @@ router.post('/:id', uploader.single('photo'), async (req, res, next) => {
   const deletePhoto = await cloudinary.uploader.destroy(req.user.profilePicture.publicId);
   const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
   Promise.all([deletePhoto, updateProfile])
-  .then(() => res.redirect('/'))
+  console.log('req.user', req.user, 'req.body', req.body, 'req.params', req.params)
+  .then(() => res.redirect('/profile/{{_id}}'))
 })
 
 module.exports = router;
