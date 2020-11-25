@@ -5,7 +5,8 @@ const ensureLogin = require("connect-ensure-login");
 
 // display all projects
 router.get("/", ensureLogin.ensureLoggedIn(), (req, res) => {
-  const user = req.session.passport.user
+  const user = req.session.passport.user;
+  console.log(user)
   Project.find().then((allProjects) => {
     res.render("project/projects", { allProjects, user });
   });
@@ -13,7 +14,7 @@ router.get("/", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 // display add project form
 router.get("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
-  const user = req.session.passport.user
+  const user = req.session.passport.user;
   let optionsLocation = "";
   [ "Amsterdam", "Barcelona", "Berlin", "Lisbon", "Madrid", "Mexico City", "Miami", "Paris", "São Paulo", "Remote"].forEach((location) => {
     let selectedLocation = "";
