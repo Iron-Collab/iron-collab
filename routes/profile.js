@@ -9,7 +9,9 @@ const ensureLogin = require('connect-ensure-login');
 router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
   const user = await User.findById(req.params.id);
   const project = await Project.find({ owner: [req.params.id] });
-  res.render('profile/profile', { user, project })
+  const applied = await Project.find({ applicants: [req.params.id] });
+  const team = await Project.find({ team: [req.params.id] });
+  res.render('profile/profile', { user, project, applied, team })
 });
 
 // display edit profile

@@ -50,6 +50,14 @@ router.get("/:id/delete", ensureLogin.ensureLoggedIn(), (req, res) => {
     .then(() => res.redirect("/projects"))
 });
 
+// apply to project
+router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res) => {
+  console.log('REQ.USER', req.user.id)
+  Project.findByIdAndUpdate(req.params.id, {applicants: req.user._id})
+    .then(() => res.redirect("/profile/{{id}}"))
+});
+
+
 // add project
 router.post("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
   const { title, description, deadline, webdev, uxui, data, tags } = req.body;
@@ -80,6 +88,5 @@ router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
       res.render("project/projects", { allProjects: filtered });
     });
 });
-
 
 module.exports = router;
