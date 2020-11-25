@@ -1,52 +1,117 @@
 <h1 class="h1">Projects looking for a hire:</h1>
-<div class="d-inline-flex p-2 bd-highlight flex-nowrap flex-column align-items-center">
 
-  <div class="d-inline-flex p-2 bd-highlight flex-nowrap flex-column shadow-lg">
-    <form action="/projects" method="POST">
 
-      <label for="searchBar" id="searchBar"></label>
-      <select name="searchBar" class="custom-select" id="searchBar">
-        <option selected>Choose...</option>
-        <option value="webdev">Software Developer</option>
-        <option value="uxui">UX | UI Designer</option>
-        <option value="data">Data Analyst</option>
-      </select>
 
-      <label for="searchLoc" id="searchLoc"></label>
-      <select name="searchLoc" class="custom-select" id="searchLoc">
-        <option selected>Choose...</option>
-        <option value="Berlin">Berlin</option>
-        <option value="Barcelona">Barcelona</option>
-        <option value="Miami">Miami</option>
-      </select>
+{{!-- <form action="/projects" method="POST">
 
-      <div class="justify-content-center align-items-center">
-        <button class="btn btn-info rounded-pill" type="Submit">Filter</button>
+        <label for="searchBar" id="searchBar"></label>
+        <select name="searchBar" class="custom-select" id="searchBar">
+          <option selected>Choose...</option>
+          <option value="webdev">Software Developer</option>
+          <option value="uxui">UX | UI Designer</option>
+          <option value="data">Data Analyst</option>
+        </select>
+
+        <label for="searchLoc" id="searchLoc"></label>
+        <select name="searchLoc" class="custom-select" id="searchLoc">
+          <option selected>Choose...</option>
+          <option value="Berlin">Berlin</option>
+          <option value="Barcelona">Barcelona</option>
+          <option value="Miami">Miami</option>
+        </select>
+
+        <div class="justify-content-center align-items-center">
+          <button class="btn btn-info rounded-pill" type="Submit">Filter</button>
+        </div>
+
+      </form> --}}
+
+
+<div class="wrapper">
+
+  <div id="sidebar">
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h3>Sidebar</h3>
       </div>
 
-    </form>
+      <ul class="list-unstyled components">
+        <p>Dummy Heading</p>
+        <li class="active">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Filter</a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li>
+              <form action="/projects" method="POST">
 
+                <label for="searchBar" id="searchBar"></label>
+                <select name="searchBar" class="custom-select" id="searchBar">
+                  <option selected>Choose...</option>
+                  <option value="webdev">Software Developer</option>
+                  <option value="uxui">UX | UI Designer</option>
+                  <option value="data">Data Analyst</option>
+                </select>
+
+                <label for="searchLoc" id="searchLoc"></label>
+                <select name="searchLoc" class="custom-select" id="searchLoc">
+                  <option selected>Choose...</option>
+                  <option value="Berlin">Berlin</option>
+                  <option value="Barcelona">Barcelona</option>
+                  <option value="Miami">Miami</option>
+                </select>
+
+                <div style="margin-left: 25px;">
+                  <button style="width: 150px" class="btn btn-info rounded-pill" type="submit">Filter</button>
+                </div>
+              </form>
+            <li>
+              <a href="/projects"> <button type="button" class="btn btn-info rounded-pill">See all Projects</button></a>
+
+            </li>
+        </li>
+
+      </ul>
+      </li>
+      <li class="active">
+        <a href="#projectSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add a Project</a>
+        <ul class="collapse list-unstyled" id="projectSubmenu">
+          <li>
+            <a href="/projects/new"> <button type="button" class="btn btn-info rounded-pill">Add a new
+                Project</button></a>
+
+          </li>
+        </ul>
+      </li>
+    </nav>
   </div>
 
-  <div class="d-inline-flex p-2 bd-highlight flex-wrap flex-column justify-content-around">
+
+  <div class="bd-highlight d-flex p-2 flex-row flex-wrap justify-content-around" id="content">
 
     {{#each allProjects}}
-    <div class="shadow-lg p-3 mb-5 bg-white rounded">
-      Title: {{title}} <br>
-      Looking for: <br>
-      Software Developer: {{lookingFor.webdev}}<br>
-      UX | UI Designer: {{lookingFor.uxui}} <br>
-      Data Analyst: {{lookingFor.data}} <br>
+    <div style="width: 500px; height: 500px" class=" shadow-lg p-3 mb-5 bg-white rounded">
+      <h5> Title: &nbsp; {{title}}</h5> <br>
+      <strong style="margin-left: 200px;"> Looking for: </strong> <br>
 
+      Software Developer: &nbsp; {{lookingFor.webdev}}<br>
+      UX | UI Designer: &nbsp; {{lookingFor.uxui}} <br>
+      Data Analyst: &nbsp; {{lookingFor.data}} <br>
+      <br>
+      <strong>Description: </strong>
+      <div style="width:450px; height: 150px; background-color: #eee; overflow: scroll" class="overflow-auto">
+        {{description}}
+      </div>
+      Online since: &nbsp; {{createdAt}}
+      <div style="margin-top: 10px;" class="d-flex p-2 justify-content-center align-items-center">
+        <a href="/projects/{{_id}}">
+          <button type="button" class="btn btn-info rounded-pill">Learn More</button>
+        </a>
 
-      <a href="/projects/{{_id}}">
-        <button type="button" class="btn btn-info rounded-pill">Learn More</button>
-      </a>
+      </div>
+
 
     </div>
     {{/each}}
   </div>
-</div>
 
-<a href="/projects"> <button type="button" class="btn btn-info rounded-pill">See all Projects</button></a>
-<a href="/projects/new"> <button type="button" class="btn btn-info rounded-pill">Add a new Project</button></a>
+
+</div>

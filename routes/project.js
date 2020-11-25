@@ -80,24 +80,47 @@ router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
 // filter projects
 router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { searchBar, searchLoc } = req.body;
-  // console.log('searchBar', searchBar, 'searchLoc', searchLoc)
   const filtered = [];
-  Project.find()
-    .then((found) => {
-      // console.log(found)
-      found.forEach((project, index) => {
-        console.log('HERE', project.lookingFor[searchBar])
-        if (project.lookingFor[searchBar] !== null) {
-          filtered.push(project);
-        }
-        if (project.location == searchLoc) {
-          filtered.push(project);
-        }
+  if (searchBar !== "Choose..." && searchLoc !== "Choose...") {
+    Project.find()
+      .then((found) => {
+        found.forEach((project, index) => {
+          if (
+            project.lookingFor[searchBar] !== null &&
+            project.location == searchLoc
+          ) {
+            filtered.push(project);
+          }
+        });
+      })
+      .then(() => {
+        res.render("project/projects", { allProjects: filtered });
       });
-    })
-    .then(() => {
-      res.render("project/projects", { allProjects: filtered });
-    });
+  } else if (searchBar === "Choose..." && searchLoc !== "Choose...") {
+    Project.find()
+      .then((found) => {
+        found.forEach((project, index) => {
+          if (project.location == searchLoc) {
+            filtered.push(project);
+          }
+        });
+      })
+      .then(() => {
+        res.render("project/projects", { allProjects: filtered });
+      });
+  } else if (searchBar !== "Choose..." && searchLoc === "Choose...") {
+    Project.find()
+      .then((found) => {
+        found.forEach((project, index) => {
+          if (project.lookingFor[searchBar] !== null) {
+            filtered.push(project);
+          }
+        });
+      })
+      .then(() => {
+        res.render("project/projects", { allProjects: filtered });
+      });
+  }
 });
 
 module.exports = router;
