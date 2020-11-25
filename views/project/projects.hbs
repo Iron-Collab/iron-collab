@@ -1,6 +1,3 @@
-<h1 class="h1">Projects looking for a hire:</h1>
-
-
 
 {{!-- <form action="/projects" method="POST">
 
@@ -21,7 +18,7 @@
         </select>
 
         <div class="justify-content-center align-items-center">
-          <button class="btn btn-info rounded-pill" type="Submit">Filter</button>
+          <button class="btn btn-dark" type="Submit">Filter</button>
         </div>
 
       </form> --}}
@@ -60,11 +57,11 @@
                 </select>
 
                 <div style="margin-left: 25px;">
-                  <button style="width: 150px" class="btn btn-info rounded-pill" type="submit">Filter</button>
+                  <button style="width: 150px" class="btn btn-dark" type="submit">Filter</button>
                 </div>
               </form>
             <li>
-              <a href="/projects"> <button type="button" class="btn btn-info rounded-pill">See all Projects</button></a>
+              <a href="/projects"> <button type="button" class="btn btn-dark ">See all Projects</button></a>
 
             </li>
         </li>
@@ -75,7 +72,7 @@
         <a href="#projectSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add a Project</a>
         <ul class="collapse list-unstyled" id="projectSubmenu">
           <li>
-            <a href="/projects/new"> <button type="button" class="btn btn-info rounded-pill">Add a new
+            <a href="/projects/new"> <button type="button" class="btn btn-dark">Add a new
                 Project</button></a>
 
           </li>
@@ -86,6 +83,7 @@
 
 
   <div class="bd-highlight d-flex p-2 flex-row flex-wrap justify-content-around" id="content">
+    {{!-- <h1 class="h1">Projects looking for a hire:</h1><br> --}}
 
     {{#each allProjects}}
     <div style="width: 500px; height: 500px" class=" shadow-lg p-3 mb-5 bg-white rounded">
@@ -103,7 +101,7 @@
       Online since: &nbsp; {{createdAt}}
       <div style="margin-top: 10px;" class="d-flex p-2 justify-content-center align-items-center">
         <a href="/projects/{{_id}}">
-          <button type="button" class="btn btn-info rounded-pill">Learn More</button>
+          <button type="button" class="btn btn-dark">Learn More</button>
         </a>
 
       </div>

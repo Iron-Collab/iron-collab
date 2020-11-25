@@ -43,14 +43,59 @@ router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 // edit profile
-router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
-  // console.log('req.user', req.user, 'req.body', req.body, 'req.params', req.params)
-  console.log('REQ FILE', req.file)
-  const { email, name, lastName, course, location, website, github } = req.body;
-  const deletePhoto = await cloudinary.uploader.destroy(req.user.profilePicture.publicId);
-  const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
-  console.log('UPDATED', updateProfile)
-  Promise.all([deletePhoto, updateProfile]).then(() => res.redirect('/'))
+router.post('/:id/edit', uploader.single('photo'), /* async */ (req, res, next) => {
+  console.log('req.user', req.user, /* 'req.body', req.body, 'req.params', req.params */)
+  // let deletePhoto;
+  // let updateProfile;
+  const { email, name, lastName, course, location, website, github} = req.body;
+  // console.log('GOOGLE.ID', req.user.googleID)
+  // if (req.user.googleID !== null) {
+  //   try {
+  //     updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github})
+  //   }catch (error) {console.log('ERROR2', error)}
+  //   Promise.all([updateProfile])
+  //   .then(() => {
+  //     res.redirect('/')
+  //   })
+  //   .catch(error => { 
+  //     console.error(error.message)
+  //   });
+  // } else {
+  //   console.log('PUBLIC ID', req.user.profilePicture.publicId)
+  //   try {
+  //     deletePhoto = await cloudinary.uploader.destroy(req.user.profilePicture.publicId);
+  //   }catch (error) {
+  //     console.log('ERROR', error)
+  //   }
+  //   try {
+  //     updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
+  //   }catch (error) {
+  //     console.log('ERROR2', error)
+  //   }
+  //   Promise.all([deletePhoto, updateProfile])
+  //   .then(() => {
+  //     console.log('UPDATED', updateProfile, "DELETE", deletePhoto)
+  //     res.redirect('/')
+  //   })
+  //   .catch(error => { 
+  //     console.error(error.message)
+  //   });
+  // }
+  
+  
+  // console.log('UPDATED', updateProfile)
+
+  
 })
+
+// // edit profile
+// router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
+//   const { email, name, lastName, course, location, website, github } = req.body;
+//   const deletePhoto = await cloudinary.uploader.destroy(req.user.profilePicture.publicId);
+//   const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
+//   Promise.all([deletePhoto, updateProfile])
+//   .then(() => res.redirect('/'))
+//   .catch(error => console.error(error.message));
+// })
 
 module.exports = router;
