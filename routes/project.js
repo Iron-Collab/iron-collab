@@ -46,17 +46,29 @@ router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 // display edit project form
 router.get("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
-  Project.findById(req.params.id).populate('owner')
-  .then((project) => {
-    // console.log('PROJECT', project)
-    let optionsLocation = '';
-    ['Amsterdam', 'Barcelona', 'Berlin', 'Lisbon', 'Madrid', 'Mexico City', 'Miami', 'Paris', 'São Paulo', 'Remote'].forEach((location) => {
-      let selectedLocation = '';
-      selectedLocation = (req.user.location === location) ? ' selected' : '';
-      optionsLocation += `<option value='${location}' ${selectedLocation}>${location}</option>`
-    })
-    res.render("project/edit_project", { project, optionsLocation });
-  })
+  Project.findById(req.params.id)
+    .populate("owner")
+    .then((project) => {
+      // console.log('PROJECT', project)
+      let optionsLocation = "";
+      [
+        "Amsterdam",
+        "Barcelona",
+        "Berlin",
+        "Lisbon",
+        "Madrid",
+        "Mexico City",
+        "Miami",
+        "Paris",
+        "São Paulo",
+        "Remote",
+      ].forEach((location) => {
+        let selectedLocation = "";
+        selectedLocation = req.user.location === location ? " selected" : "";
+        optionsLocation += `<option value='${location}' ${selectedLocation}>${location}</option>`;
+      });
+      res.render("project/edit_project", { project, optionsLocation });
+    });
 });
 
 // delete project
@@ -76,10 +88,25 @@ router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 // add project
 router.post("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
-  const { title, description, deadline, webdev, uxui, data, location, tags } = req.body;
-  console.log('req.user', req.user, 'req.body', req.body)
-  Project.create({ title, description, deadline, lookingFor: {webdev, uxui, data}, owner: req.user._id, location })
-  .then(() => res.redirect('/projects'))
+  const {
+    title,
+    description,
+    deadline,
+    webdev,
+    uxui,
+    data,
+    location,
+    tags,
+  } = req.body;
+  console.log("req.user", req.user, "req.body", req.body);
+  Project.create({
+    title,
+    description,
+    deadline,
+    lookingFor: { webdev, uxui, data },
+    owner: req.user._id,
+    location,
+  }).then(() => res.redirect("/projects"));
 });
 
 // edit project
@@ -111,25 +138,49 @@ router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
 // filter projects
 router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { searchBar, searchLoc } = req.body;
+
   console.log("filter", req.body);
   const filtered = [];
-  Project.find()
-    .then((found) => {
-      found.forEach((project, index) => {
-        // if (project.lookingFor[searchBar] !== null) {
-        //   filtered.push(project);
-        // }
-        if (project.location == searchLoc) {
-          filtered.push(project);
-        }
-        console.log("in loop", filtered);
+  if (searchBar !== "Choose..." && searchLoc !== "Choose...") {
+    Project.find()
+      .then((found) => {
+        found.forEach((project, index) => {
+          if (
+            project.lookingFor[searchBar] !== null &&
+            project.location == searchLoc
+          ) {
+            filtered.push(project);
+          }
+        });
+      })
+      .then(() => {
+        res.render("project/projects", { allProjects: filtered });
       });
-      console.log("after loop", filtered);
-    })
-    .then(() => {
-      console.log("filtered at the render", filtered);
-      res.render("project/projects", { allProjects: filtered });
-    });
+  } else if (searchBar === "Choose..." && searchLoc !== "Choose...") {
+    Project.find()
+      .then((found) => {
+        found.forEach((project, index) => {
+          if (project.location == searchLoc) {
+            filtered.push(project);
+          }
+        });
+      })
+      .then(() => {
+        res.render("project/projects", { allProjects: filtered });
+      });
+  } else if (searchBar !== "Choose..." && searchLoc === "Choose...") {
+    Project.find()
+      .then((found) => {
+        found.forEach((project, index) => {
+          if (project.lookingFor[searchBar] !== null) {
+            filtered.push(project);
+          }
+        });
+      })
+      .then(() => {
+        res.render("project/projects", { allProjects: filtered });
+      });
+  }
 });
 
 module.exports = router;
