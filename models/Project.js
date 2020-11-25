@@ -9,11 +9,12 @@ const projectSchema = new Schema(
     owner: [{ type: Schema.Types.ObjectId, ref: User }],
     lookingFor: {
       webdev: Number,
-      uxUi: Number,
+      uxui: Number,
       data: Number,
     },
     tags: [String],
     deadline: Date,
+    location: String,
     attachments: String,
     applicants: [{ type: Schema.Types.ObjectId, ref: User }],
     team: [{ type: Schema.Types.ObjectId, ref: User }],

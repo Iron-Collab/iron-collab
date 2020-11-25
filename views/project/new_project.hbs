@@ -6,26 +6,26 @@
     <div class="form-row">
       <div class="col-md-6 mb-3">
         <label for="title"><strong>Title: </strong></label>
-        <input id="title" class="form-control" type="title" name="title" >
+        <input id="title" class="form-control" type="text" name="title" >
       </div>
   
       <div class="col-md-6 mb-3">
-        <label for="datepicker"><strong>Deadline: </strong></label>
-        <input id="deadline" class="form-control" type="date" name="datepicker" >
+        <label for="deadline"><strong>Deadline: </strong></label>
+        <input id="deadline" class="form-control" type="date" name="deadline" >
       </div>
     </div><br>
 
     {{!-- DESCRIPTION --}}
     <div class="form-row">
         <label for="description"><strong>Description: </strong></label>
-        <textarea id="description" class="form-control" type="title" name="description"></textarea>
+        <textarea id="description" class="form-control" type="text" name="description"></textarea>
     </div><br>
 
     {{!-- LOCATION & STATUS --}}
     <div class="form-row">
       <div class="col-md-6 mb-3">
         <label for="location"><strong>Location: </strong></label>
-        <select name="course" id="course" class="custom-select">
+        <select name="location" id="location" class="custom-select">
           {{{ optionsLocation }}}
         </select>
       </div>
