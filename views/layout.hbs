@@ -12,29 +12,26 @@
   {{!-- Date Picker --}}
   
   {{!-- Date Picker OPTION KEVIN--}}
-  {{!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
-  </script> --}}
+  </script>
 </head>
 <body>
 
-{{#if user}}  
   <div class="nav">
     <a href="/">Home</a>
     <a href="/profile/{{ user.id }}">Profile</a>
     <a href="/projects">Projects</a>
+  {{#unless user}}
+    <a href="/signup">Sign up</a>
+    <a href="/login">Login</a>
+  {{/unless}}
     <a href="/logout">Log Out</a>
   </div>
-{{else}}
-    <div class="nav">
-      <a href="/signup">Sign up</a>
-      <a href="/login">Login</a>
-    </div>
-{{/if}}
 
 
   {{{body}}}

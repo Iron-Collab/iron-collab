@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const { uploader, cloudinary } = require('../config/cloudinary');
 
-
 router.get('/signup', (req, res) => res.render('auth/signup'));
 router.get('/login', (req, res) => res.render('auth/login'));
 

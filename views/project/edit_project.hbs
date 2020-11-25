@@ -1,67 +1,74 @@
-<div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
-  
 {{#with project}}
 
+<div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
+  <h1>Edit Project</h1><br>
   <form class="" action="/projects/{{ id }}" method="POST">
 
-{{!-- TITLE --}}
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label id="title" class="input-group-text">Title:</label>
+    {{!-- TITLE & DEALINE --}}
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="title"><strong>Title: </strong></label>
+        <input id="title" class="form-control" type="title" name="title" value="{{ title }}" >
       </div>
-      <input name="title" id="title" class="form-control" aria-label="With textarea" value="{{ title }}"></input>
-    </div>
-    <br>
-
-{{!-- DESCRIPTION --}}
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label for="description" class="input-group-text">Description:</label>
+  
+      <div class="col-md-6 mb-3">
+        <label for="datepicker"><strong>Deadline: </strong></label>
+        <input id="deadline" class="form-control" type="date" name="datepicker" value="{{ deadline }}">
       </div>
-      <textarea name="description" id="description" class="form-control" aria-label="With textarea" value="{{ description }}"></textarea>
-    </div>
-    <br>
+    </div><br>
 
-{{!-- DEADLINE --}}
-   <div class="input-group">
-      <div class="input-group-prepend">
-        <label id="datepicker" class="input-group-text">Deadline:</label>
-      </div>
-      <div class="datepicker date">
-        <input name="deadline" id="datepicker" class="form-control" aria-label="With textarea" value="{{ deadline }}"></input>
-      </div>
-    </div>
-    <br>
+    {{!-- DESCRIPTION --}}
+    <div class="form-row">
+        <label for="description"><strong>Description: </strong></label>
+        <textarea id="description" class="form-control" type="title" name="description" value="{{ description }}" ></textarea>
+    </div><br>
 
-{{!-- LOOKING FOR --}}
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="lookingFor">Looking for:</label>
-      </div>
-      <select class="custom-select" id="lookingFor" name="lookingFor">
-        <option selected>Choose...</option>
-        <option value="webDev">Software Developer</option>
-        <option value="ux-ui">Designer UX|UI o</option>
-        <option value="data">Data</option>
-      </select>
-    </div>
-    <br>
-
-{{!-- STATUS --}}
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <label id="status" class="input-group-text">Status:</label>
-      </div>
-      <input name="status" id="status" class="form-control" aria-label="With textarea" value="{{ status }}"></input>
-    </div>
-    <br>
-
-{{!-- TEAM --}}
-
-{{!-- APPLICANTS --}}
-
-    <button class="btn btn-primary" type="submit">Save changes</button>
-
-  </form>
 {{/with}}
+
+    {{!-- LOCATION & STATUS --}}
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="location"><strong>Location:</strong></label>
+        <select name="course" id="course" class="custom-select">
+          {{{ optionsLocation }}}
+        </select>
+      </div>
+
+{{#with project}}
+
+      <div class="col-md-6 mb-3">
+        <label id="status"><strong>Status:</strong></label>
+        <select name="status" id="status" class="custom-select">
+          <option value="active" selected>Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+    <br>
+
+  {{!-- LOOKING FOR --}}
+    <p><strong>Looking for ... to collaborate with:</strong></p>
+    <div class="form-row">
+      <div class="col-4 mb-3">
+        <label for="webdev" {{!-- class="input-group-text" --}}>Web Developer: </label>
+        <input class="form-control" type="number" name="webdev" id="webdev" min="0" max="4" value="{{ lookingFor.webdev }}">
+      </div>
+      <div class="col-4 mb-3">
+        <label for="uxui" {{!-- class="input-group-text" --}}>UX/UI Designer: </label>
+        <input class="form-control" type="number" name="uxui" id="uxui" min="0" max="4" value="{{ lookingFor.uxui }}">
+      </div>
+      <div class="col-4 mb-3">
+        <label for="data" {{!-- class="input-group-text" --}}>Data Analyst: </label>
+        <input class="form-control" type="number" name="data" id="data" min="0" max="4" value="{{ lookingFor.data }}">
+      </div>
+    </div><br>
+
+    {{!-- TEAM --}}
+
+    {{!-- APPLICANTS --}}
+  
+    <button class="btn btn-primary" type="submit">Save changes</button>
+  </form>
 </div>
+
+{{/with}}
