@@ -1,44 +1,51 @@
 const express = require("express");
 const router = express.Router();
 const Project = require("../models/Project");
-const ensureLogin = require("connect-ensure-login");
+const ensureLogin = require('connect-ensure-login');
 
-router.get("/projects", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.get("/", ensureLogin.ensureLoggedIn(), (req, res) => {
   Project.find().then((allProjects) => {
-    console.log(allProjects);
-    res.render("project/board", { allProjects });
+    res.render("project/projects", { allProjects });
   });
 });
 
-router.get("/new-project", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.get("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render("project/new_project");
 });
 
-router.get(
-  "/project-details/:id",
-  ensureLogin.ensureLoggedIn(),
-  (req, res, next) => {
-    const projectId = req.params.id;
-    Project.findById(projectId)
-      .populate("owner")
-      .then((projectDetails) => {
-        res.render("project/project_details", { projectDetails });
-      });
-  }
-);
-
-router.get("/my-projects", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const id = req.body.id;
-  Project.find({ id })
-    .then((found) => {
-      res.render("profile/profile", { userProjects: found });
-    })
-    .catch((err) => {
-      console.log(err);
+router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
+  Project.findById(req.params.id).populate("owner")
+    .then((project) => {
+      res.render("project/project_details", { project });
     });
 });
 
-router.post("/projects", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.get("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
+  Project.findById(req.params.id).populate('owner')
+    .then((project) => {
+      res.render("project/edit_project", { project });
+    })
+});
+
+router.get("/:id/delete", ensureLogin.ensureLoggedIn(), (req, res) => {
+  Project.findByIdAndDelete(req.params.id)
+    .then(() => res.redirect("/projects"))
+});
+
+router.post("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const { title, description, deadline, lookingFor, tags } = req.body;
+  Project.create({ title, description, deadline, lookingFor, owner: req.user })
+  .then(() => res.redirect('projects'))
+});
+
+router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const { title, description, deadline, lookingFor, tags, applicants, team } = req.body;
+  Project.findByIdAndUpdate(req.params.id, { title, description, lookingFor: {webDev, uxUi, data}, tags, deadline, applicants, team })
+    .then(() => res.redirect('/projects'))
+})
+
+// FELIX
+router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { searchBar, searchLoc } = req.body;
   const filtered = [];
   Project.find()
@@ -50,29 +57,9 @@ router.post("/projects", ensureLogin.ensureLoggedIn(), (req, res, next) => {
       });
     })
     .then(() => {
-      res.render("project/board", { allProjects: filtered });
+      res.render("project/projects", { allProjects: filtered });
     });
 });
 
-router.post("/new-project", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  const { title, description, deadline, webDev, uxUi, data } = req.body;
-  Project.create({
-    title,
-    description,
-    deadline,
-    lookingFor: {
-      webDev,
-      uxUi,
-      data,
-    },
-    owner: req.user,
-  })
-    .then((newProject) => {
-      console.log(newProject);
-      res.render("project/board", { newProject });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+
 module.exports = router;

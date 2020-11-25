@@ -1,18 +1,21 @@
-<h1>Project Details</h1>
+<div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
+  <h1>Project Details</h1><br>
+  
+  {{#with project}}
+    <h5><strong>Title:</strong> {{ title }}</h5>
+    <h5><strong>Description:</strong> {{ description }}</h5>
+    <h5><strong>Looking for:</strong> {{ lookingFor }}</h5>
+    <h5><strong>Owner:</strong> <a href="/profile/{{ owner.0.id }}">{{ owner.0.name }} {{ owner.0.lastName }}</a></h5>
+    <h5><strong>Deadline:</strong> {{ deadline }}</h5>
+    <h5><strong>Status:</strong> {{ status }}</h5>
+  
+    <a href="/"><button type="button" class="btn btn-primary">Apply</button></a>
+    <a href="/projects"><button type="button" class="btn btn-primary">See all Projects</button></a>
 
-<div class="shadow-lg p-3 mb-5 bg-white rounded">
-  {{#with projectDetails}}
-  Title: {{title}} <br>
-  Looking for:{{lookingFor}}<br>
-  Owner: {{owner}}<br>
-  Description: {{description}} <br>
-  Deadline: {{deadline}} <br>
-  Random line <br>
+    {{!-- {{#if owner.0.role === "admin" }} --}}
+    <a href="/projects/{{ id }}/edit"><button type="button" class="btn btn-primary">Edit Project</button></a>
+    <a href="/projects/{{ id }}/delete"><button type="button" class="btn btn-primary">Delete Project</button></a>
+    {{!-- {{/if}} --}}
 
-  <a href="/">
-
-    <button type="button" class="btn btn-info rounded-pill">Apply</button>
-  </a>
-  <a href="/projects"><button type="button" class="btn btn-info rounded-pill">See all Projects</button></a>
   {{/with}}
 </div>

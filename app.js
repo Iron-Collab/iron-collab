@@ -151,6 +151,6 @@ app.use("/", auth);
 const profile = require("./routes/profile");
 app.use("/profile", profile);
 const projects = require("./routes/project");
-app.use("/", projects);
+app.use("/projects", projects);
 
 module.exports = app;

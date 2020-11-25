@@ -1,18 +1,24 @@
-// body {
-//   padding: 50px;
-//   background-color: #eeeeee;
-//   color: #222831;
-//   font-size: 14px;
-// }
-
+body{
+  // margin-top: 80px;
+  padding-top: 80px;
+  color: #222831;
+  text-align: left;
+  background-color: #eeeeee;    
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 a {
   color: #00B7FF;
 }
 
 h1 {
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 2rem;
   margin-top: 30px;
   text-align: center;
+}
+
+.container {
+  background-color: #eeeeee;  
 }
 
 .nav {
@@ -33,14 +39,6 @@ h1 {
   font-size: 1.1rem;
 }
 
-body{
-  margin-top:80px;
-  color: #222831;
-  text-align: left;
-  background-color: #eeeeee;    
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-
-}
 .main-body {
   padding: 15px;
 }
@@ -92,6 +90,40 @@ body{
 .login {
   // text-align: center;
   justify-content: center;
+}
+// my profile my projects
+
+.collapsible-link::before {
+  content: '';
+  width: 14px;
+  height: 2px;
+  background: #222831;
+  position: absolute;
+  top: calc(50% - 1px);
+  right: 1rem;
+  display: block;
+  transition: all 0.3s;
+}
+
+/* Vertical line */
+.collapsible-link::after {
+  content: '';
+  width: 2px;
+  height: 14px;
+  background: #222831;
+  position: absolute;
+  top: calc(50% - 7px);
+  right: calc(1rem + 6px);
+  display: block;
+  transition: all 0.3s;
+}
+
+.collapsible-link[aria-expanded='true']::after {
+  transform: rotate(90deg) translateX(-1px);
+}
+
+.collapsible-link[aria-expanded='true']::before {
+  transform: rotate(180deg);
 }
 
 .searchBar {

@@ -1,0 +1,67 @@
+<div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
+  
+{{#with project}}
+
+  <form class="" action="/projects/{{ id }}" method="POST">
+
+{{!-- TITLE --}}
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label id="title" class="input-group-text">Title:</label>
+      </div>
+      <input name="title" id="title" class="form-control" aria-label="With textarea" value="{{ title }}"></input>
+    </div>
+    <br>
+
+{{!-- DESCRIPTION --}}
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label for="description" class="input-group-text">Description:</label>
+      </div>
+      <textarea name="description" id="description" class="form-control" aria-label="With textarea" value="{{ description }}"></textarea>
+    </div>
+    <br>
+
+{{!-- DEADLINE --}}
+   <div class="input-group">
+      <div class="input-group-prepend">
+        <label id="datepicker" class="input-group-text">Deadline:</label>
+      </div>
+      <div class="datepicker date">
+        <input name="deadline" id="datepicker" class="form-control" aria-label="With textarea" value="{{ deadline }}"></input>
+      </div>
+    </div>
+    <br>
+
+{{!-- LOOKING FOR --}}
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="lookingFor">Looking for:</label>
+      </div>
+      <select class="custom-select" id="lookingFor" name="lookingFor">
+        <option selected>Choose...</option>
+        <option value="webDev">Software Developer</option>
+        <option value="ux-ui">Designer UX|UI o</option>
+        <option value="data">Data</option>
+      </select>
+    </div>
+    <br>
+
+{{!-- STATUS --}}
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label id="status" class="input-group-text">Status:</label>
+      </div>
+      <input name="status" id="status" class="form-control" aria-label="With textarea" value="{{ status }}"></input>
+    </div>
+    <br>
+
+{{!-- TEAM --}}
+
+{{!-- APPLICANTS --}}
+
+    <button class="btn btn-primary" type="submit">Save changes</button>
+
+  </form>
+{{/with}}
+</div>
