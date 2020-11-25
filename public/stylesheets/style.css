@@ -1,6 +1,6 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
-  padding-top: 80px;
+  padding-top: 50px;
   color: #222831;
   text-align: left;
   background-color: #eeeeee;
@@ -203,4 +203,5 @@ ul ul a {
     margin-left: -250px; }
   #sidebar.active {
     margin-left: 0; } }
+
 /*# sourceMappingURL=style.css.map */
