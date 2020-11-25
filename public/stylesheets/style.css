@@ -3,7 +3,7 @@ body {
   padding-top: 80px;
   color: #222831;
   text-align: left;
-  background-color: #eeeeee;
+  background-color: #D1E8E2;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
@@ -16,7 +16,7 @@ h1 {
   text-align: center; }
 
 .container {
-  background-color: #eeeeee; }
+  background-color: #D1E8E2; }
 
 .nav {
   display: flex;
@@ -135,7 +135,7 @@ h1 {
 
 .wrapper {
   font-family: 'Poppins', sans-serif;
-  background: #fafafa;
+  background: #D9B08C;
   display: flex;
   align-items: stretch; }
 
@@ -164,17 +164,17 @@ a, a:hover, a:focus {
 
 #sidebar {
   /* don't forget to add all the previously mentioned styles here too */
-  background: #7386D5;
+  background: #D9B08C;
   color: #fff;
   transition: all 0.3s; }
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #6d7fcc; }
+  background: #D9B08C; }
 
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #47748b; }
+  border-bottom: 1px solid #D9B08C; }
 
 #sidebar ul p {
   color: #fff;
@@ -191,12 +191,12 @@ a, a:hover, a:focus {
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
   color: #fff;
-  background: #6d7fcc; }
+  background: #D9B08C; }
 
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #6d7fcc; }
+  background: #D9B08C; }
 
 @media (max-width: 768px) {
   #sidebar {
