@@ -1,28 +1,28 @@
 <div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
   <h1>Project Details</h1><br>
   
-  {{#with project}}
-    <h5><strong>Title: </strong> {{ title }}</h5>
-    <h5><strong>Description: </strong> {{ description }}</h5>
-    <h5><strong>Location: </strong> {{ owner.0.location }}</h5>
+  {{#with project }}
+    <h5><strong>Title: </strong> {{ title }} </h5>
+    <h5><strong>Description: </strong> {{ description }} </h5>
+    <h5><strong>Location: </strong> {{ location }} </h5>
     <h5><strong>Looking for: </strong></h5>
       <ul>
         {{#if lookingFor.webdev}}
-        <li><h6>Web Developers: {{lookingFor.webdev}}</h6></li>
+        <li><h6>Web Developers: {{lookingFor.webdev}} </h6></li>
         {{/if}}
         {{#if lookingFor.uxui}}
-        <li><h6>UX/UI Designers: {{lookingFor.uxui}}</h6></li>
+        <li><h6>UX/UI Designers: {{lookingFor.uxui}} </h6></li>
         {{/if}}
         {{#if lookingFor.data}}
-        <li><h6>Data Analysts: {{lookingFor.data}}</h6></li>
+        <li><h6>Data Analysts: {{lookingFor.data}} </h6></li>
         {{/if}}
       </ul>
     <h5><strong>Owner:</strong> <a href="/profile/{{ owner.0.id }}">{{ owner.0.name }} {{ owner.0.lastName }}</a></h5>
-    <h5><strong>Deadline:</strong> {{ deadline }}</h5>
-    <h5><strong>Status:</strong> {{ status }}</h5>
+    <h5><strong>Deadline:</strong> {{ deadline }} </h5>
+    <h5><strong>Status:</strong> {{ status }} </h5>
     <h5><strong>Applicants:</strong></h5>
       <ul>
-        {{#each applicants}}
+        {{#each applicants }}
         <li><a href="/profile/{{ id }}">{{ name }} {{ lastName }}</a></li>
         {{/each}}
       </ul>

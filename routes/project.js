@@ -34,7 +34,7 @@ router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
 router.get("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
   Project.findById(req.params.id).populate('owner')
   .then((project) => {
-    console.log('PROJECT', project)
+    // console.log('PROJECT', project)
     let optionsLocation = '';
     ['Amsterdam', 'Barcelona', 'Berlin', 'Lisbon', 'Madrid', 'Mexico City', 'Miami', 'Paris', 'São Paulo', 'Remote'].forEach((location) => {
       let selectedLocation = '';
@@ -58,11 +58,11 @@ router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res) => {
     .then(() => res.redirect("/profile/{{id}}"))
 });
 
-
 // add project
 router.post("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
-  const { title, description, deadline, webdev, uxui, data, tags } = req.body;
-  Project.create({ title, description, deadline, lookingFor: {webdev, uxui, data}, owner: req.user._id, location: req.user.location })
+  const { title, description, deadline, webdev, uxui, data, location, tags } = req.body;
+  console.log('req.user', req.user, 'req.body', req.body)
+  Project.create({ title, description, deadline, lookingFor: {webdev, uxui, data}, owner: req.user._id, location })
   .then(() => res.redirect('/projects'))
 });
 
