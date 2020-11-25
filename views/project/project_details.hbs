@@ -1,39 +1,83 @@
-<div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
-  <h1>Project Details</h1><br>
-  
-  {{#with project }}
-    <h5><strong>Title: </strong> {{ title }} </h5>
-    <h5><strong>Description: </strong> {{ description }} </h5>
-    <h5><strong>Location: </strong> {{ location }} </h5>
-    <h5><strong>Looking for: </strong></h5>
-      <ul>
-        {{#if lookingFor.webdev}}
-        <li><h6>Web Developers: {{lookingFor.webdev}} </h6></li>
-        {{/if}}
-        {{#if lookingFor.uxui}}
-        <li><h6>UX/UI Designers: {{lookingFor.uxui}} </h6></li>
-        {{/if}}
-        {{#if lookingFor.data}}
-        <li><h6>Data Analysts: {{lookingFor.data}} </h6></li>
-        {{/if}}
+<!-- Wrapper -->
+<div class="wrapper">
+ 
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <!-- close sidebar menu -->
+      <div class="dismiss"><i class="fas fa-arrow-left"></i></div>
+      <div class="logo"><h3><a href="index.html">Bootstrap 4 Template with Sidebar Menu</a></h3></div>
+      <ul class="list-unstyled menu-elements">
+          <li class="active"><a class="scroll-link" href="#top-content"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="scroll-link" href="#section-1"><i class="fas fa-cog"></i> What we do</a></li>
+          <li><a class="scroll-link" href="#section-2"><i class="fas fa-user"></i> About us</a></li>
+          <li><a class="scroll-link" href="#section-5"><i class="fas fa-pencil-alt"></i> Portfolio</a></li>
+          <li><a class="scroll-link" href="#section-6"><i class="fas fa-envelope"></i> Contact us</a></li>
+          <li>
+              <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+                  <i class="fas fa-sync">
+                  </i>Other sections</a>
+              <ul class="collapse list-unstyled" id="otherSections">
+                  <li><a class="scroll-link" href="#section-3">Our projects</a></li>
+                  <li><a class="scroll-link" href="#section-4">We think that...</a></li>
+              </ul>
+          </li>
       </ul>
-    <h5><strong>Owner:</strong> <a href="/profile/{{ owner.0.id }}">{{ owner.0.name }} {{ owner.0.lastName }}</a></h5>
-    <h5><strong>Deadline:</strong> {{ deadline }} </h5>
-    <h5><strong>Status:</strong> {{ status }} </h5>
-    <h5><strong>Applicants:</strong></h5>
-      <ul>
-        {{#each applicants }}
-        <li><a href="/profile/{{ id }}">{{ name }} {{ lastName }}</a></li>
-        {{/each}}
-      </ul>
-  
-    <a href="/projects/{{ id }}/apply"><button type="button" class="btn btn-primary">Apply</button></a>
-    <a href="/projects"><button type="button" class="btn btn-primary">See all Projects</button></a>
+      <div class="to-top">
+          <a class="btn btn-primary btn-customized-3" href="#" role="button">
+              <i class="fas fa-arrow-up"></i> Top
+          </a>
+      </div>
+      <div class="dark-light-buttons">
+          <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+          <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+      </div>
+    </nav>
+    <!-- End sidebar -->
+ 
+    <!-- Content -->
+    <div class="content">
+      {{!-- <div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
+        <h1>Project Details</h1><br>
+        
+        {{#with project }}
+          <h5><strong>Title: </strong> {{ title }} </h5>
+          <h5><strong>Description: </strong> {{ description }} </h5>
+          <h5><strong>Location: </strong> {{ location }} </h5>
+          <h5><strong>Looking for: </strong></h5>
+            <ul>
+              {{#if lookingFor.webdev}}
+              <li><h6>Web Developers: {{lookingFor.webdev}} </h6></li>
+              {{/if}}
+              {{#if lookingFor.uxui}}
+              <li><h6>UX/UI Designers: {{lookingFor.uxui}} </h6></li>
+              {{/if}}
+              {{#if lookingFor.data}}
+              <li><h6>Data Analysts: {{lookingFor.data}} </h6></li>
+              {{/if}}
+            </ul>
+          <h5><strong>Owner:</strong> <a href="/profile/{{ owner.0.id }}">{{ owner.0.name }} {{ owner.0.lastName }}</a></h5>
+          <h5><strong>Deadline:</strong> {{ deadline }} </h5>
+          <h5><strong>Status:</strong> {{ status }} </h5>
+          <h5><strong>Applicants:</strong></h5>
+            <ul>
+              {{#each applicants }}
+              <li><a href="/profile/{{ id }}">{{ name }} {{ lastName }}</a></li>
+              {{/each}}
+            </ul>
+        
+          <a href="/projects/{{ id }}/apply"><button type="button" class="btn btn-primary">Apply</button></a>
+          <a href="/projects"><button type="button" class="btn btn-primary">See all Projects</button></a>
+          <a href="/projects/{{ id }}/edit"><button type="button" class="btn btn-primary">Edit Project</button></a>
+          <a href="/projects/{{ id }}/delete"><button type="button" class="btn btn-primary">Delete Project</button></a>
 
-    {{!-- {{#if owner.0.role === "admin" }} --}}
-    <a href="/projects/{{ id }}/edit"><button type="button" class="btn btn-primary">Edit Project</button></a>
-    <a href="/projects/{{ id }}/delete"><button type="button" class="btn btn-primary">Delete Project</button></a>
-    {{!-- {{/if}} --}}
-
-  {{/with}}
+        {{/with}}
+      </div> --}}
+    </div>
+    <!-- End content -->
+ 
 </div>
+<!-- End wrapper -->
+
+
+
+

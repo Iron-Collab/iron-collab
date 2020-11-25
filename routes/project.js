@@ -5,57 +5,46 @@ const ensureLogin = require("connect-ensure-login");
 
 // display all projects
 router.get("/", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const user = req.session.passport.user
   Project.find().then((allProjects) => {
-    res.render("project/projects", { allProjects });
+    res.render("project/projects", { allProjects, user });
   });
 });
 
 // display add project form
 router.get("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const user = req.session.passport.user
   let optionsLocation = "";
-  [
-    "Amsterdam",
-    "Barcelona",
-    "Berlin",
-    "Lisbon",
-    "Madrid",
-    "Mexico City",
-    "Miami",
-    "Paris",
-    "São Paulo",
-    "Remote",
-  ].forEach((location) => {
+  [ "Amsterdam", "Barcelona", "Berlin", "Lisbon", "Madrid", "Mexico City", "Miami", "Paris", "São Paulo", "Remote"].forEach((location) => {
     let selectedLocation = "";
     selectedLocation = req.user.location === location ? " selected" : "";
     optionsLocation += `<option value='${location}' ${selectedLocation}>${location}</option>`;
   });
-  res.render("project/new_project", { optionsLocation });
+  res.render("project/new_project", { optionsLocation, user });
 });
 
 // display project details
 router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
-  Project.findById(req.params.id)
-    .populate("owner")
-    .populate("applicants")
-    .populate("team")
+  const user = req.session.passport.user
+  Project.findById(req.params.id).populate("owner").populate("applicants").populate("team")
     .then((project) => {
-      console.log("PROJECT", project);
-      res.render("project/project_details", { project });
+      res.render("project/project_details", { project, user });
     });
 });
 
 // display edit project form
 router.get("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const user = req.session.passport.user
   Project.findById(req.params.id).populate('owner')
   .then((project) => {
-    // console.log('PROJECT', project)
+    // console.log('PROJECT description', project.description /* 'req.params.id', req.params.id,'req.body', req.body */)
     let optionsLocation = '';
     ['Amsterdam', 'Barcelona', 'Berlin', 'Lisbon', 'Madrid', 'Mexico City', 'Miami', 'Paris', 'São Paulo', 'Remote'].forEach((location) => {
       let selectedLocation = '';
       selectedLocation = (req.user.location === location) ? ' selected' : '';
       optionsLocation += `<option value='${location}' ${selectedLocation}>${location}</option>`
     })
-    res.render("project/edit_project", { project, optionsLocation });
+    res.render("project/edit_project", { project, optionsLocation, user });
   })
 });
 
@@ -68,7 +57,6 @@ router.get("/:id/delete", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 // apply to project
 router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res) => {
-  console.log("REQ.USER", req.user.id);
   Project.findByIdAndUpdate(req.params.id, {
     applicants: req.user._id,
   }).then(() => res.redirect("/profile/{{id}}"));
@@ -77,57 +65,37 @@ router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res) => {
 // add project
 router.post("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
   const { title, description, deadline, webdev, uxui, data, location, tags } = req.body;
-  console.log('req.user', req.user, 'req.body', req.body)
   Project.create({ title, description, deadline, lookingFor: {webdev, uxui, data}, owner: req.user._id, location })
   .then(() => res.redirect('/projects'))
 });
 
 // edit project
 router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
-  const {
-    title,
-    description,
-    deadline,
-    webdev,
-    uxui,
-    data,
-    location,
-    tags,
-    applicants,
-    team,
-  } = req.body;
-  Project.findByIdAndUpdate(req.params.id, {
-    title,
-    description,
-    lookingFor: { webdev, uxui, data },
-    location,
-    tags,
-    deadline,
-    applicants,
-    team,
-  }).then(() => res.redirect("/projects"));
+  const { title, description, deadline, webdev, uxui, data, location, tags, applicants, team } = req.body;
+  // console.log('req.params.id', req.params.id,'req.body', req.body)
+  Project.findByIdAndUpdate(req.params.id, { title, description, lookingFor: { webdev, uxui, data }, location, tags, deadline, applicants, team })
+  .then(() => res.redirect("/projects"));
 });
 
 // filter projects
 router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { searchBar, searchLoc } = req.body;
-  console.log("filter", req.body);
+  // console.log('searchBar', searchBar, 'searchLoc', searchLoc)
   const filtered = [];
   Project.find()
     .then((found) => {
+      // console.log(found)
       found.forEach((project, index) => {
-        // if (project.lookingFor[searchBar] !== null) {
-        //   filtered.push(project);
-        // }
+        console.log('HERE', project.lookingFor[searchBar])
+        if (project.lookingFor[searchBar] !== null) {
+          filtered.push(project);
+        }
         if (project.location == searchLoc) {
           filtered.push(project);
         }
-        console.log("in loop", filtered);
       });
-      console.log("after loop", filtered);
     })
     .then(() => {
-      console.log("filtered at the render", filtered);
       res.render("project/projects", { allProjects: filtered });
     });
 });

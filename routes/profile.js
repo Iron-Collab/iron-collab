@@ -43,13 +43,14 @@ router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 // edit profile
-router.post('/:id', uploader.single('photo'), async (req, res, next) => {
-  const { email, name, lastName, course, location, website, github, profilePicture } = req.body;
+router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
+  // console.log('req.user', req.user, 'req.body', req.body, 'req.params', req.params)
+  console.log('REQ FILE', req.file)
+  const { email, name, lastName, course, location, website, github } = req.body;
   const deletePhoto = await cloudinary.uploader.destroy(req.user.profilePicture.publicId);
   const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
-  Promise.all([deletePhoto, updateProfile])
-  console.log('req.user', req.user, 'req.body', req.body, 'req.params', req.params)
-  .then(() => res.redirect('/profile/{{_id}}'))
+  console.log('UPDATED', updateProfile)
+  Promise.all([deletePhoto, updateProfile]).then(() => res.redirect('/'))
 })
 
 module.exports = router;
