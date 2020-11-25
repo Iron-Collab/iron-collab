@@ -129,7 +129,7 @@ passport.use(
               email: profile._json.email,
               name: profile._json.given_name,
               lastName: profile._json.family_name,
-              profilePicture: profile._json.picture
+              profilePicture: { imgPath: profile._json.picture }
             }).then(newUser => {
                 done(null, newUser);
               })

@@ -3,23 +3,23 @@
 <h1>Edit profile</h1><br><br>
 
 {{#with user}}
-<form action="/profile/{{ id }}" method="POST" enctype="multipart/form-data">
+<form action="/profile/{{ _id }}/edit" method="POST" enctype="multipart/form-data">
 
   <div class="form-row">
     <div class="col-md-6 mb-3">
-      <label for="email">Email: </label>
+      <label for="email"><strong>Email:</strong> </label>
       <input id="email" class="form-control" type="email" name="email" value={{ email }} required>
     </div>
   </div><br>
 
   <div class="form-row">
     <div class="col-md-6 mb-3">
-      <label for="name">Name: </label>
+      <label for="name"><strong>Name:</strong> </label>
       <input id="name" class="form-control" type="text" name="name" value={{ name }}>
     </div>
 
     <div class="col-md-6 mb-3">
-      <label for="lastName">Last Name: </label>
+      <label for="lastName"><strong>Last Name:</strong> </label>
       <input id="lastName" class="form-control" type="text" name="lastName" value={{ lastName }}>
     </div>
   </div><br>
@@ -28,14 +28,14 @@
 
   <div class="form-row">
     <div class="col-md-6 mb-3">
-      <label for="course">Course: </label>
+      <label for="course"><strong>Course:</strong> </label>
       <select name="course" id="course" class="custom-select">
         {{{ optionsCourse }}}
       </select>
     </div>
 
     <div class="col-md-6 mb-3">
-      <label for="location">Location: </label>
+      <label for="location"><strong>Location:</strong> </label>
       <select name="location" id="location" class="custom-select">
         {{{ optionsLocation }}}
       </select>
@@ -46,20 +46,20 @@
 
   <div class="form-row">
     <div class="col-md-6 mb-3">
-      <label for="website">Website: </label>
+      <label for="website"><strong>Website:</strong> </label>
       <input id="website" class="form-control" type="text" name="website" value={{ website }}>
     </div>
 
     <div class="col-md-6 mb-3">
-      <label for="github">GitHub: </label>
+      <label for="github"><strong>GitHub:</strong> </label>
       <input id="github" class="form-control" type="text" name="github" value={{ github }}>
     </div>
   </div><br>
 
-  <p>Profile picture: </p>
+  <p><strong>Profile picture:</strong> </p>
   <div class="custom-file mb-3">
-    <input type="file" class="custom-file-input" id="profilePicture" name="photo" value="{{ profilePicture.imgPath }}" placeholder="Choose file...">
-    <label class="custom-file-label" for="profilePicture">{{ profilePicture.imgPath }}</label>
+    <input type="file" class="custom-file-input" id="profilePicture" name="photo" value="{{ profilePicture.imgPath }}" >
+    <label class="custom-file-label" for="profilePicture">Choose a file...</label>
     {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
   </div><br><br>
 
