@@ -23,8 +23,9 @@ router.get("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 // display project details
 router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
-  Project.findById(req.params.id).populate("owner")
+  Project.findById(req.params.id).populate("owner").populate('applicants').populate('team')
     .then((project) => {
+      console.log('PROJECT', project)
       res.render("project/project_details", { project });
     });
 });
