@@ -65,13 +65,17 @@
           <h5 class="mt-3"><strong>Deadline:</strong> {{ deadline }} </h5>
           <h5 class="mt-3"><strong>Status:</strong> {{ status }} </h5>
           <h5 class="mt-3 mb-3"><strong>Team:</strong></h5>
-
+          <ul>
+            {{#each team}}
+            <li><a href="{{ id }}">{{ name }} {{ lastName }}</a></li>
+            {{/each}}
+          </ul>
 {{!-- add team --}}
 {{#if isOwner}}
           <h5 class="mt-3 mb-3"><strong>Applicants:</strong></h5>
           <form action="/projects/{{id}}" method="POST">
             {{#each applicants }}
-              <span><a href="/profile/{{ id }}">{{ name }} {{ lastName }}</a></span>
+              <span><a href="{{ id }}">{{ name }} {{ lastName }}</a></span>
               <label for="approve">Approve</label>
               <input id="approve" name="{{ id }}" type="radio" value="approve" >
               <label for="reject">Reject</label>

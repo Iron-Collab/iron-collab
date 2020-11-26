@@ -10,8 +10,8 @@ const logger = require("morgan");
 const path = require("path");
 
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost/iron-collab', { useNewUrlParser: true })
-  // .connect("mongodb://localhost/project2", { useNewUrlParser: true })
+  // .connect(process.env.MONGODB_URI || 'mongodb://localhost/iron-collab', { useNewUrlParser: true })
+  .connect("mongodb://localhost/project2", { useNewUrlParser: true })
   .then((x) => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
@@ -113,8 +113,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "https://iron-collab.herokuapp.com/auth/google/callback",
-      // callbackURL: "http://localhost:3000/auth/google/callback",
+      // callbackURL: "https://iron-collab.herokuapp.com/auth/google/callback",
+      callbackURL: "http://localhost:3000/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       // to see the structure of the data in received response:
