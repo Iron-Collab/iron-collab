@@ -6,7 +6,6 @@ const ensureLogin = require("connect-ensure-login");
 // display all projects
 router.get("/", ensureLogin.ensureLoggedIn(), (req, res) => {
   const user = req.session.passport.user;
-  console.log(user)
   Project.find().then((allProjects) => {
     res.render("project/projects", { allProjects, user });
   });
@@ -29,6 +28,13 @@ router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
   const user = req.session.passport.user
   Project.findById(req.params.id).populate("owner").populate("applicants").populate("team")
     .then((project) => {
+      let applied;
+      for (let applicant of project.applicants) {
+        if (applicant._id == user) {
+          return project.isApplicant = true
+        }
+      }
+      console.log('APPLICANT', project.isApplicant)
       project.isOwner = project.owner[0]._id == user;
       res.render("project/project_details", { project, user });
     });
@@ -66,7 +72,8 @@ router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res, next) => {
           $push: {applicants: req.user._id }
         }).then(() => res.redirect("/profile"));
     } else {
-      res.render('project/project_details', { message: 'You have aplready applied for this project' })
+      res.redirect('/projects')
+      // res.render('project/project_details', { message: 'You have already applied for this project' })
     }
   })
   .catch(err => next(err))

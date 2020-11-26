@@ -7,23 +7,21 @@ const ensureLogin = require('connect-ensure-login');
 
 // display profile
 router.get('/', ensureLogin.ensureLoggedIn(), async (req, res) => {
+  // console.log('SESSUSER', req.session.passport.user, 'userid', req.user.id)
   const user = await User.findById(req.session.passport.user);
   const project = await Project.find({ owner: [req.session.passport.user] });
-  const applied = await Project.find({ applicants: [req.session.passport.user] });
-  const team = await Project.find({ team: [req.session.passport.user] });
+  const applied = await Project.find({ applicants: {$in: [req.session.passport.user]} });
+  const team = await Project.find({ team: {$in: [req.session.passport.user]} });
   res.render('profile/profile', { user, project, applied, team })
 });
 
-// router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
-
-//   const user = await User.findById(req.params.id);
-//   const project = Project.find({ owner: [req.params.id] });
-//   const applied = Project.find({ applicants: [req.params.id] });
-//   const team = Project.find({ team: [req.params.id] });
-//   const owner = req.session.passport.user == user 
-  
-//   res.render('profile/profile', { user, project, applied, team, owner })
-// });
+router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
+  const user = await User.findById(req.params.id);
+  const project = await Project.find({ owner: [req.params.id] });
+  const applied = await Project.find({ applicants: {$in: [req.params.id]} });
+  const team = await Project.find({ team: {$in: [req.params.id]} });
+  res.render('profile/profile', { user, project, applied, team })
+});
 
 // display edit profile
 router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
@@ -57,9 +55,7 @@ router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
   const { email, name, lastName, course, location, website, github, imgPath, publicId } = req.body;
   const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github })
-  Promise.all([updateProfile])
-  .then(() => res.redirect('/profile'))
-  .catch(error => console.error(error.message));
+  res.redirect('/profile')
 })
 
 // edit profile
