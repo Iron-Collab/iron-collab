@@ -20,7 +20,7 @@ const userSchema = new Schema({
   },
   location: {
     type: String,
-    enum: ['Amsterdam', 'Barcelona', 'Berlin', 'Lisbon', 'Madrid', 'Mexico City', 'Miami', 'Paris', 'São Paulo', 'Remote']
+    enum: ['Amsterdam', 'Barcelona', 'Berlin', 'Lisbon', 'Madrid', 'Mexico City', 'Miami', 'Paris', 'Sao Paulo', 'Remote']
   },
   role: { 
     type: String,
