@@ -61,12 +61,19 @@ router.get("/:id/delete", ensureLogin.ensureLoggedIn(), (req, res) => {
 });
 
 // apply to project
-router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res) => {
-  console.log(req.body)
-  // if (appli)
-  Project.findByIdAndUpdate(req.params.id, {
-    $push: {applicants: req.user._id }
-  }).then(() => res.redirect("/profile/{{id}}"));
+router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  Project.findById(req.params.id)
+  .then((project) => {
+    if (!project.applicants.includes(req.user._id)){
+      Project.findByIdAndUpdate(req.params.id, {
+          $push: {applicants: req.user._id }
+        }).then(() => res.redirect("/projects"));
+    } else {
+      res.render('project/project_details', { message: 'You have aplready applied for this project' })
+    }
+  })
+  .catch(err => next(err))
+
 });
 
 // add project
@@ -93,7 +100,7 @@ router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
       .then((found) => {
         found.forEach((project, index) => {
           if (
-            project.lookingFor[searchBar] !== null &&
+            (project.lookingFor[searchBar] !== null || project.lookingFor[searchBar] !== 0) &&
             project.location == searchLoc
           ) {
             filtered.push(project);
@@ -119,7 +126,7 @@ router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     Project.find()
       .then((found) => {
         found.forEach((project, index) => {
-          if (project.lookingFor[searchBar] !== null) {
+          if (project.lookingFor[searchBar] !== null || project.lookingFor[searchBar] !== 0) {
             filtered.push(project);
           }
         });

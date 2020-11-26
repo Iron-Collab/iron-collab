@@ -72,7 +72,10 @@
                 </div>
               {{/each}}
             </ul>
-      
+
+      {{#if message }}
+        <p style="color: red;">You have already applied for this project</p>
+      {{/if}}
         
       </div>
     {{!-- </div> --}}
