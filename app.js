@@ -88,10 +88,10 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(
-  new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
-    console.log('test')
+  new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+    console.log("test");
     User.findOne({ email: email })
-      .then(found => {
+      .then((found) => {
         if (found === null) {
           done(null, false, { message: "Wrong credentials" });
         } else if (!bcrypt.compareSync(password, found.password)) {
@@ -131,8 +131,9 @@ passport.use(
               email: profile._json.email,
               name: profile._json.given_name,
               lastName: profile._json.family_name,
-              profilePicture: { imgPath: profile._json.picture }
-            }).then(newUser => {
+              profilePicture: { imgPath: profile._json.picture },
+            })
+              .then((newUser) => {
                 done(null, newUser);
               })
               .catch((err) => done(err));
