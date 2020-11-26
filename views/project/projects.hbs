@@ -1,30 +1,5 @@
-
-{{!-- <form action="/projects" method="POST">
-
-        <label for="searchBar" id="searchBar"></label>
-        <select name="searchBar" class="custom-select" id="searchBar">
-          <option selected>Choose...</option>
-          <option value="webdev">Software Developer</option>
-          <option value="uxui">UX | UI Designer</option>
-          <option value="data">Data Analyst</option>
-        </select>
-
-        <label for="searchLoc" id="searchLoc"></label>
-        <select name="searchLoc" class="custom-select" id="searchLoc">
-          <option selected>Choose...</option>
-          <option value="Berlin">Berlin</option>
-          <option value="Barcelona">Barcelona</option>
-          <option value="Miami">Miami</option>
-        </select>
-
-        <div class="justify-content-center align-items-center">
-          <button class="btn btn-dark" type="Submit">Filter</button>
-        </div>
-
-      </form> --}}
-
-
 <div class="wrapper">
+
   <div id="sidebar">
     <nav id="sidebar">
       <ul class="list-unstyled components mt-5 m-2">
@@ -74,9 +49,11 @@
 
 
   <div class="bd-highlight d-flex p-2 flex-row flex-wrap justify-content-around" id="content">
-    {{!-- <h1 class="h1">Projects looking for a hire:</h1><br> --}}
+
+    <h2 class="h2">Projects looking for a hire:</h2>
 
     {{#each allProjects}}
+
       <div style="width: 500px; height: 450px" class=" shadow-lg p-4 mt-4 bg-#fff8c1 rounded">
         <h5><strong>Title:</strong> &nbsp; {{title}}</h5> <br>
         <strong> Looking for: </strong> <br>
