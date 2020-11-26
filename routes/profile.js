@@ -6,6 +6,14 @@ const { uploader, cloudinary } = require('../config/cloudinary');
 const ensureLogin = require('connect-ensure-login');
 
 // display profile
+router.get('/', ensureLogin.ensureLoggedIn(), async (req, res) => {
+  const user = await User.findById(req.session.passport.user);
+  const project = await Project.find({ owner: [req.session.passport.user] });
+  const applied = await Project.find({ applicants: [req.session.passport.user] });
+  const team = await Project.find({ team: [req.session.passport.user] });
+  res.render('profile/profile', { user, project, applied, team })
+});
+
 router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
   const user = await User.findById(req.params.id);
   const project = await Project.find({ owner: [req.params.id] });

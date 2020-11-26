@@ -29,6 +29,8 @@ router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
   const user = req.session.passport.user
   Project.findById(req.params.id).populate("owner").populate("applicants").populate("team")
     .then((project) => {
+      console.log(project.owner)
+      project.isOwner = project.owner[0]._id == user;
       res.render("project/project_details", { project, user });
     });
 });
@@ -36,10 +38,8 @@ router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
 // display edit project form
 router.get("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
   const user = req.session.passport.user
-  // console.log('', req.params)
   Project.findById(req.params.id).populate('owner')
   .then((project) => {
-    console.log('PROJECT', project /* 'req.params.id', req.params.id,'req.body', req.body */)
     let optionsLocation = '';
     ['Amsterdam', 'Barcelona', 'Berlin', 'Lisbon', 'Madrid', 'Mexico City', 'Miami', 'Paris', 'São Paulo', 'Remote'].forEach((location) => {
       let selectedLocation = '';
@@ -52,12 +52,10 @@ router.get("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 // delete project
 router.get("/:id/delete", ensureLogin.ensureLoggedIn(), (req, res) => {
-  const owner = Project.findById(req.params.id)
-  console.log(owner.schema.paths)
-  // if (req.user._id === owner.query.schema.paths.owner[0])
-  // Project.findByIdAndDelete(req.params.id).then(() =>
-  //   res.redirect("/projects")
-  // );
+  if (req.user._id === owner.query.schema.paths.owner[0])
+  Project.findByIdAndDelete(req.params.id).then(() =>
+    res.redirect("/projects")
+  );
 });
 
 // apply to project
@@ -73,7 +71,6 @@ router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     }
   })
   .catch(err => next(err))
-
 });
 
 // add project
@@ -84,11 +81,29 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
 });
 
 // edit project
-router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
+router.post("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
   const { title, description, deadline, webdev, uxui, data, location, tags, applicants, team } = req.body;
   // console.log('req.params.id', req.params.id,'req.body', req.body)
   Project.findByIdAndUpdate(req.params.id, { title, description, lookingFor: { webdev, uxui, data }, location, tags, deadline, applicants, team })
   .then(() => res.redirect("/projects"));
+});
+
+// approving / rejecting applicants
+router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const id = req.user.id;
+  if (req.body[id] === 'approve') {
+    Project.findByIdAndUpdate(req.params.id, {
+        $push: {team: id }, 
+        $pull: {applicants: id}
+    })
+    .then(() => res.redirect("/projects")) //replace with project details page
+  }
+  if (req.body[id] === 'reject') {
+    Project.findByIdAndUpdate(req.params.id, {
+      $pull: {applicants: id}
+    })
+    .then(() => res.redirect("/projects")) //replace with project details page
+  }
 });
 
 // filter projects
