@@ -28,10 +28,10 @@ router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
   const user = req.session.passport.user
   Project.findById(req.params.id).populate("owner").populate("applicants").populate("team")
     .then((project) => {
-      let applied;
+      project.isApplicant = false;
       for (let applicant of project.applicants) {
         if (applicant._id == user) {
-          return project.isApplicant = true
+          project.isApplicant = true
         }
       }
       console.log('APPLICANT', project.isApplicant)
@@ -69,12 +69,23 @@ router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   .then((project) => {
     if (!project.applicants.includes(req.user._id)){
       Project.findByIdAndUpdate(req.params.id, {
-          $push: {applicants: req.user._id }
-        }).then(() => res.redirect("/profile"));
+        $push: {applicants: req.user._id }
+      }).then(() => res.redirect(`/profile`));
     } else {
-      res.redirect('/projects')
-      // res.render('project/project_details', { message: 'You have already applied for this project' })
+      res.render('project/project_details', { alert: 'You have already applied for this project'})
     }
+  })
+  .catch(err => next(err))
+});
+
+router.get("/:id/withdraw", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  Project.findById(req.params.id)
+  .then((project) => {
+    if (!project.applicants.includes(req.user._id)){
+      Project.findByIdAndUpdate(req.params.id, {
+          $pull: {applicants: req.user._id }
+        }).then(() => res.redirect(`/profile`));
+    } 
   })
   .catch(err => next(err))
 });
@@ -95,7 +106,7 @@ router.post("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
 });
 
 // approving / rejecting applicants
-router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
+router.post("/:id/applicants", ensureLogin.ensureLoggedIn(), (req, res) => {
   Project.findById(req.params.id)
   .then(project => {
     const applicants = project.applicants;
@@ -103,19 +114,36 @@ router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
       if (req.body[applicant] === 'approve') {
         Project.findByIdAndUpdate(req.params.id, {
             $push: { team: applicant }, 
-            $pull: {applicants: applicant }
+            $pull: { applicants: applicant }
         })
-        .then(() => res.redirect("/projects")) //replace with project details page
+        .then(() => res.redirect(`projects/${req.params.id}`)) //replace with project details page
       }
       if (req.body[applicant] === 'reject') {
         Project.findByIdAndUpdate(req.params.id, {
-          $pull: {applicants: applicant }
+          $pull: { applicants: applicant }
         })
-        .then(() => res.redirect("/projects")) //replace with project details page
+        .then(() => res.redirect(`projects/${req.params.id}`))
       }
     }
   })
 })
+
+//deleting team members
+router.post("/:id/team", ensureLogin.ensureLoggedIn(), (req, res) => {
+  Project.findById(req.params.id)
+  .then(project => {
+    const team = project.team;
+    for (let member of team) {
+      if (req.body[member] === 'delete') {
+        Project.findByIdAndUpdate(req.params.id, {
+            $pull: { team: member }
+        })
+        .then(() => res.redirect(`projects/${req.params.id}`))
+      }
+    }
+  })
+})
+
 
 // filter projects
 router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
