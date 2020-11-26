@@ -1,31 +1,32 @@
-<div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded">
+<div class="container shadow-lg p-4 mt-5 mb-5 rounded" style="background-color: #FBEEC1;">
 
-<h1>Welcome!</h1><br><br>
+  <h1>Welcome!</h1><br><br>
 
-<form class= "text-center" action="/login" method="POST">
+  <form class="text-center" action="/login" method="POST">
 
     <div class="form-row">
       <div class="col-md-6 mb-3">
         <label for="email">Email: </label>
         <input id="email" class="form-control" type="text" name="email" required>
       </div>
-  
+
       <div class="col-md-6 mb-3">
         <label for="password">Password: </label>
-        <input id="password" class="form-control" type="password" name="password" aria-describedby="passwordHelpBlock" required>
+        <input id="password" class="form-control" type="password" name="password" aria-describedby="passwordHelpBlock"
+          required>
       </div>
     </div><br>
 
     {{#if message}}
-        <p style="color: red">{{message}}</p>
+    <p style="color: red">{{message}}</p>
     {{/if}}
 
-    <button class="btn btn-dark" type="submit">Log In</button>
+    <button class="btn btn-dark" type="submit" style="background-color: #557A95">Log In</button>
     <a href="/google"><img src="images/btn_google_signin_dark_normal_web.png" alt="Log in with Google"></a>
 
-</form>
+  </form>
 
-{{!-- <body class="text-center">
+  {{!-- <body class="text-center">
     <form class="form-signin">
   <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
