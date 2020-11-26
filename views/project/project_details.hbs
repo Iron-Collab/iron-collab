@@ -64,17 +64,22 @@
           <h5 class="mt-3"><strong>Owner:</strong> <a href="/profile/{{ owner.0.id }}">{{ owner.0.name }} {{ owner.0.lastName }}</a></h5>
           <h5 class="mt-3"><strong>Deadline:</strong> {{ deadline }} </h5>
           <h5 class="mt-3"><strong>Status:</strong> {{ status }} </h5>
+          {{#if team}}
           <h5 class="mt-3 mb-3"><strong>Team:</strong></h5>
           <ul>
+            
             {{#each team}}
             <li><a href="{{ id }}">{{ name }} {{ lastName }}</a></li>
             {{/each}}
           </ul>
+          {{/if}}
 {{!-- add team --}}
 {{#if isOwner}}
+          {{#if applicants}}
           <h5 class="mt-3 mb-3"><strong>Applicants:</strong></h5>
           <form action="/projects/{{id}}" method="POST">
             {{#each applicants }}
+              <br>
               <span><a href="{{ id }}">{{ name }} {{ lastName }}</a></span>
               <label for="approve">Approve</label>
               <input id="approve" name="{{ id }}" type="radio" value="approve" >
@@ -83,6 +88,7 @@
             {{/each}}
             <button type="submit">submit</button>
           </form>
+          {{/if}}
 {{/if}}
             {{!-- <ul>
               {{#each applicants }}
@@ -97,9 +103,7 @@
       {{!-- {{#if message }}
         <p style="color: red;">You have already applied for this project</p>
       {{/if}} --}}
-        {{#if isOwner}}
-        <p>Is owner</p>
-        {{/if}}
+       
       </div>
     {{!-- </div> --}}
     <!-- End content -->

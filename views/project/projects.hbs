@@ -48,32 +48,34 @@
   </div>
 
 
-  <div class="bd-highlight d-flex p-2 flex-row flex-wrap justify-content-around" id="content">
+  <div class="bd-highlight d-flex p-2 mt-3 flex-row flex-wrap justify-content-around" id="content">
 
     <h2 class="h2">Projects looking for a hire:</h2>
 
-      {{#each allProjects}}
-        <div style="width: 500px; height: 450px" class=" shadow-lg p-4 mt-4 bg-#fff8c1 rounded">
-          <h5><strong>Title:</strong> &nbsp; {{title}}</h5> <br>
-          <strong> Looking for: </strong> <br>
-  
-          <li>Software Developer: &nbsp; {{lookingFor.webdev}} </li>
-          <li>UX | UI Designer: &nbsp; {{lookingFor.uxui}} </li>
-          <li>Data Analyst: &nbsp; {{lookingFor.data}} </li>
-          
-          <br><strong>Description: </strong>
-          <div style="width:450px; height: 120px; background-color: #eee; overflow: scroll" class="overflow-auto">
-            {{description}}
+      <div class="projects">
+        {{#each allProjects}}
+          <div style="width: 500px; height: 450px" class=" shadow-lg p-4 mt-4 bg-#fff8c1 rounded">
+            <h5><strong>Title:</strong> &nbsp; {{title}}</h5> <br>
+            <strong> Looking for: </strong> <br>
+    
+            <li>Software Developer: &nbsp; {{lookingFor.webdev}} </li>
+            <li>UX | UI Designer: &nbsp; {{lookingFor.uxui}} </li>
+            <li>Data Analyst: &nbsp; {{lookingFor.data}} </li>
+            
+            <br><strong>Description: </strong>
+            <div style="width:450px; height: 120px; background-color: #eee; overflow: scroll" class="overflow-auto">
+              {{description}}
+            </div>
+            <p style="font-size: 14px;"><strong>Online since:</strong> &nbsp; {{createdAt}}</p>
+    
+            <div style="margin-top: 10px;" class="d-flex p-2 justify-content-center align-items-center">
+              <a href="/projects/{{ id }}">
+                <button type="button" class="btn btn-dark btn-sm">Learn More</button>
+              </a>
+            </div>
           </div>
-          <p style="font-size: 14px;"><strong>Online since:</strong> &nbsp; {{createdAt}}</p>
-  
-          <div style="margin-top: 10px;" class="d-flex p-2 justify-content-center align-items-center">
-            <a href="/projects/{{ id }}">
-              <button type="button" class="btn btn-dark btn-sm">Learn More</button>
-            </a>
-          </div>
-        </div>
-      {{/each}}
+        {{/each}}
+      </div>
 
   </div>
 

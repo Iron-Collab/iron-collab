@@ -101,13 +101,9 @@ router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
   //     console.error(error.message)
   //   });
   // }
-  
-  
-  // console.log('UPDATED', updateProfile)
-
-  
 // })
 
+// VERSION THAT WORKS BUT ONLY FOR SIGN UPS
 // // edit profile
 // router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
 //   const { email, name, lastName, course, location, website, github } = req.body;

@@ -34,8 +34,8 @@
 
     <div class="form-row">
       <div class="col-md-6 mb-3">
-        <label for="course">Course: </label>
-        <select name="course" id="course" class="custom-select">
+        <label for="course">Course*: </label>
+        <select name="course" id="course" class="custom-select" required>
           <option value="Web Development">Web Development</option>
           <option value="UX/UI Design">UX/UI Design</option>
           <option value="Data Analytics">Data Analytics</option>
@@ -44,8 +44,8 @@
       </div>
   
       <div class="col-md-6 mb-3">
-        <label for="location">Location: </label>
-        <select name="location" id="location" class="custom-select">
+        <label for="location">Location*: </label>
+        <select name="location" id="location" class="custom-select" required>
           <option value="Amsterdam">Amsterdam</option>
           <option value="Barcelona">Barcelona</option>
           <option value="Berlin">Berlin</option>
@@ -67,7 +67,7 @@
       </div>
 
       <div class="col-md-6 mb-3">
-        <label for="github">GitHub: </label>v
+        <label for="github">GitHub: </label>
         <input id="github" class="form-control" type="text" name="github" value={{ github }}>
       </div>
     </div><br>
