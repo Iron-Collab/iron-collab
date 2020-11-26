@@ -14,13 +14,16 @@ router.get('/', ensureLogin.ensureLoggedIn(), async (req, res) => {
   res.render('profile/profile', { user, project, applied, team })
 });
 
-router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
-  const user = await User.findById(req.params.id);
-  const project = await Project.find({ owner: [req.params.id] });
-  const applied = await Project.find({ applicants: [req.params.id] });
-  const team = await Project.find({ team: [req.params.id] });
-  res.render('profile/profile', { user, project, applied, team })
-});
+// router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
+
+//   const user = await User.findById(req.params.id);
+//   const project = Project.find({ owner: [req.params.id] });
+//   const applied = Project.find({ applicants: [req.params.id] });
+//   const team = Project.find({ team: [req.params.id] });
+//   const owner = req.session.passport.user == user 
+  
+//   res.render('profile/profile', { user, project, applied, team, owner })
+// });
 
 // display edit profile
 router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
@@ -51,11 +54,20 @@ router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 // edit profile
-router.post('/:id/edit', uploader.single('photo'), /* async */ (req, res, next) => {
-  console.log('req.user', req.user, /* 'req.body', req.body, 'req.params', req.params */)
+router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
+  const { email, name, lastName, course, location, website, github, imgPath, publicId } = req.body;
+  const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github })
+  Promise.all([updateProfile])
+  .then(() => res.redirect('/profile'))
+  .catch(error => console.error(error.message));
+})
+
+// edit profile
+// router.post('/:id/edit', uploader.single('photo'), /* async */ (req, res, next) => {
+//   console.log('req.user', req.user, /* 'req.body', req.body, 'req.params', req.params */)
   // let deletePhoto;
   // let updateProfile;
-  const { email, name, lastName, course, location, website, github} = req.body;
+  // const { email, name, lastName, course, location, website, github} = req.body;
   // console.log('GOOGLE.ID', req.user.googleID)
   // if (req.user.googleID !== null) {
   //   try {
@@ -94,7 +106,7 @@ router.post('/:id/edit', uploader.single('photo'), /* async */ (req, res, next) 
   // console.log('UPDATED', updateProfile)
 
   
-})
+// })
 
 // // edit profile
 // router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {

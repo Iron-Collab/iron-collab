@@ -29,7 +29,6 @@ router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
   const user = req.session.passport.user
   Project.findById(req.params.id).populate("owner").populate("applicants").populate("team")
     .then((project) => {
-      console.log(project.owner)
       project.isOwner = project.owner[0]._id == user;
       res.render("project/project_details", { project, user });
     });
@@ -65,7 +64,7 @@ router.get("/:id/apply", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     if (!project.applicants.includes(req.user._id)){
       Project.findByIdAndUpdate(req.params.id, {
           $push: {applicants: req.user._id }
-        }).then(() => res.redirect("/projects"));
+        }).then(() => res.redirect("/profile"));
     } else {
       res.render('project/project_details', { message: 'You have aplready applied for this project' })
     }

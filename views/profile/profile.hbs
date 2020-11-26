@@ -1,4 +1,4 @@
-<h1>Profile</h1><br>
+<h1 class="mt-5">Profile</h1><br>
 
 {{#with user}}
   <div class="container">
@@ -138,6 +138,7 @@
 {{/with}}
 
 {{!-- MY PROJECTS --}}
+{{#if project}}
 <h4 style="text-align: center;">My Projects</h4>
 {{#each project}}
           <div id="accordionExample" class="accordion shadow">
@@ -155,9 +156,48 @@
             </div>    
           </div>
 {{/each}}
-
+{{/if}}
+{{!-- {{#each team}}
+          <div id="accordionExample" class="accordion shadow">
+            <div class="card">
+                <div id="heading{{ id }}" class="card-header bg-white shadow-sm border-0">
+                    <h2 class="mb-0">
+                        <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">{{ title }}</button>
+                    </h2>
+                </div>
+                <div id="collapse{{ id }}" aria-labelledby="heading{{ id }}" data-parent="#accordionExample" class="collapse show">
+                    <div class="card-body p-4">
+                        <p class="font-weight-light m-0">{{ description }}<a href="/projects/{{ id }}"> details</a></p>
+                    </div>
+                </div>
+            </div>    
+          </div>  
+{{/each}} --}}
 {{!-- PROJECTS I APPLIED TO --}}
+
+{{!-- APPROVED APPLICATIONS --}}
 <br>
+{{#if team}}
+<h4 style="text-align: center;">Collab Projects</h4>
+{{#each team}}
+          <div id="accordionExample" class="accordion shadow">
+            <div class="card">
+                <div id="heading{{ id }}" class="card-header bg-white shadow-sm border-0">
+                    <h2 class="mb-0">
+                        <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">{{ title }}</button>
+                    </h2>
+                </div>
+                <div id="collapse{{ id }}" aria-labelledby="heading{{ id }}" data-parent="#accordionExample" class="collapse show">
+                    <div class="card-body p-4">
+                        <p class="font-weight-light m-0">{{ description }}<a href="/projects/{{ id }}"> details</a></p>
+                    </div>
+                </div>
+            </div>    
+          </div>  
+{{/each}}
+{{/if}}
+<br>
+{{#if applied}}
 <h4 style="text-align: center;">Pending applications</h4>
 {{#each applied}}
           <div id="accordionExample" class="accordion shadow">
@@ -175,23 +215,4 @@
             </div>    
           </div>  
 {{/each}}
-
-{{!-- APPROVED APPLICATIONS --}}
-<br>
-<h4 style="text-align: center;">Approved Applications</h4>
-{{#each team}}
-          <div id="accordionExample" class="accordion shadow">
-            <div class="card">
-                <div id="heading{{ id }}" class="card-header bg-white shadow-sm border-0">
-                    <h2 class="mb-0">
-                        <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">{{ title }}</button>
-                    </h2>
-                </div>
-                <div id="collapse{{ id }}" aria-labelledby="heading{{ id }}" data-parent="#accordionExample" class="collapse show">
-                    <div class="card-body p-4">
-                        <p class="font-weight-light m-0">{{ description }}<a href="/projects/{{ id }}"> details</a></p>
-                    </div>
-                </div>
-            </div>    
-          </div>  
-{{/each}}
+{{/if}}
