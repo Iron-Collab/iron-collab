@@ -78,6 +78,11 @@ h1 {
 .login {
   justify-content: center; }
 
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
 .collapsible-link::before {
   content: '';
   width: 14px;

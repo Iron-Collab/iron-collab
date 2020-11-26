@@ -89,21 +89,26 @@ router.post("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 // approving / rejecting applicants
 router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res) => {
-  const id = req.user.id;
-  if (req.body[id] === 'approve') {
-    Project.findByIdAndUpdate(req.params.id, {
-        $push: {team: id }, 
-        $pull: {applicants: id}
-    })
-    .then(() => res.redirect("/projects")) //replace with project details page
-  }
-  if (req.body[id] === 'reject') {
-    Project.findByIdAndUpdate(req.params.id, {
-      $pull: {applicants: id}
-    })
-    .then(() => res.redirect("/projects")) //replace with project details page
-  }
-});
+  Project.findById(req.params.id)
+  .then(project => {
+    const applicants = project.applicants;
+    for (let applicant of applicants) {
+      if (req.body[applicant] === 'approve') {
+        Project.findByIdAndUpdate(req.params.id, {
+            $push: { team: applicant }, 
+            $pull: {applicants: applicant }
+        })
+        .then(() => res.redirect("/projects")) //replace with project details page
+      }
+      if (req.body[applicant] === 'reject') {
+        Project.findByIdAndUpdate(req.params.id, {
+          $pull: {applicants: applicant }
+        })
+        .then(() => res.redirect("/projects")) //replace with project details page
+      }
+    }
+  })
+})
 
 // filter projects
 router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
