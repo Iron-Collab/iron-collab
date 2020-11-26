@@ -1,7 +1,7 @@
 
 body{
   // margin-top: 80px;
-  padding-top: 80px;
+  padding-top: 50px;
   color: #222831;
   text-align: left;
   background-color: #D1E8E2;    
@@ -20,14 +20,16 @@ h1 {
 }
 
 .container {
+
   background-color: #D1E8E2;  
 }
+
 
 .nav {
   display: flex;
   flex-direction: wrap;
   justify-content: space-around;
-  background-color: #222831;
+  background-color: #2C3531;
   padding: 15px;
   position: fixed;
   top: 0;
