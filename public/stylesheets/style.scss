@@ -113,23 +113,10 @@ h5 {
   justify-content: space-around;
 }
 
-
-// my profile my projects
-
-.collapsible-link::after {
-  content: '';
-  width: 14px;
-  height: 2px;
-  background: #3d405b;
-  position: absolute;
-  top: calc(50% - 1px);
-  right: 1rem;
-  display: block;
-  transition: all 0.3s;
-}
+// my profile - accordeon
 
 /* Vertical line */
-.collapsible-link::before {
+.collapsible-link::after {
   content: '';
   width: 2px;
   height: 14px;
@@ -137,6 +124,18 @@ h5 {
   position: absolute;
   top: calc(50% - 7px);
   right: calc(1rem + 6px);
+  display: block;
+  transition: all 0.3s;
+}
+
+.collapsible-link::before {
+  content: '';
+  width: 14px;
+  height: 2px;
+  background: #3d405b;
+  position: absolute;
+  top: calc(50% - 1px);
+  right: 1rem;
   display: block;
   transition: all 0.3s;
 }
@@ -149,15 +148,17 @@ h5 {
   transform: rotate(180deg);
 }
 
-.searchBar {
-  width: 50vh;
-  margin-left: 25vh;
-}
+// filter
 
-.filterBar {
-  display: flex;
-  flex-direction: row;
-}
+// .searchBar {
+//   width: 50vh;
+//   margin-left: 25vh;
+// }
+
+// .filterBar {
+//   display: flex;
+//   flex-direction: row;
+// }
 
 //sidebar
 
