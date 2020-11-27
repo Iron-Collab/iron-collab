@@ -165,47 +165,14 @@ router.post("/:id/team", ensureLogin.ensureLoggedIn(), (req, res) => {
 // filter projects
 router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const { searchBar, searchLoc } = req.body;
-  const filtered = [];
-  if (searchBar !== "Choose..." && searchLoc !== "Choose...") {
-    Project.find()
-      .then((found) => {
-        found.forEach((project, index) => {
-          if (
-            (project.lookingFor[searchBar] !== null || project.lookingFor[searchBar] !== 0) &&
-            project.location == searchLoc
-          ) {
-            filtered.push(project);
-          }
-        });
+  Project.find()
+    .then((projects) => {
+      const filtered = projects.filter(project => {
+        return (project.location === searchLoc || !searchLoc) && project.lookingFor[searchBar] > 0 ;
       })
-      .then(() => {
-        res.render("project/projects", { allProjects: filtered });
-      });
-  } else if (searchBar === "Choose..." && searchLoc !== "Choose...") {
-    Project.find()
-      .then((found) => {
-        found.forEach((project, index) => {
-          if (project.location == searchLoc) {
-            filtered.push(project);
-          }
-        });
-      })
-      .then(() => {
-        res.render("project/projects", { allProjects: filtered });
-      });
-  } else if (searchBar !== "Choose..." && searchLoc === "Choose...") {
-    Project.find()
-      .then((found) => {
-        found.forEach((project, index) => {
-          if (project.lookingFor[searchBar] !== null || project.lookingFor[searchBar] !== 0) {
-            filtered.push(project);
-          }
-        });
-      })
-      .then(() => {
-        res.render("project/projects", { allProjects: filtered });
-      });
-  }
+      res.render('project/projects', { allProjects: filtered })
+    })
+    .catch(err => console.log(err))
 });
 
 module.exports = router;
