@@ -56,18 +56,19 @@
 
         {{#each allProjects}}
           <div style="width: 500px; height: 500px" class=" shadow-lg p-4 mt-4 bg-#fff8c1 rounded">
-            <h5><strong>Title:</strong> &nbsp; {{title}}</h5> <br>
-            <strong> Looking for: </strong> <br>
-    
-            <li>Software Developer: &nbsp; {{lookingFor.webdev}} </li>
-            <li>UX | UI Designer: &nbsp; {{lookingFor.uxui}} </li>
-            <li>Data Analyst: &nbsp; {{lookingFor.data}} </li>
+            <h5><strong>Title:</strong> &nbsp; {{ title }}</h5> <br>
+
+            <h6><strong>Location:</strong> &nbsp; {{ location }}</h6>
+
+            <h6></h6><strong> Looking for: </strong></h6>
+            <li>Software Developer: &nbsp; {{ lookingFor.webdev }} </li>
+            <li>UX | UI Designer: &nbsp; {{ lookingFor.uxui }} </li>
+            <li>Data Analyst: &nbsp; {{ lookingFor.data }} </li>
             
             <br><strong>Description: </strong>
-            <div style="width:450px; height: 120px" class="overflow-auto mb-2">
-              {{description}}
-            </div>
-            <p style="font-size: 14px;"><strong>Online since:</strong> &nbsp; {{createdAt}}</p>
+            <h6 style="width:450px; height: 100px" class="overflow-auto mb-2">{{ description }}</h6>
+
+            <p style="font-size: 13px;"><strong>Posted:</strong> &nbsp; {{ createdAt }}</p>
     
             <div style="margin-top: 10px;" class="d-flex p-2 justify-content-center align-items-center">
               <a href="/projects/{{ id }}">
