@@ -150,18 +150,15 @@ router.post("/:id/team", ensureLogin.ensureLoggedIn(), (req, res) => {
   Project.findById(req.params.id)
   .then(project => {
     for (let member of project.team) {
-      console.log('member', member, 'req.body[member]', req.body[member])
       if (req.body[member] == 'delete') {
-        console.log('here', req.body[member], 'delete')
         Project.findByIdAndUpdate(req.params.id, {
             $pull: { team: member }
         })
-      } else {
-        break
-      }
+        .then(() => console.log('deleted, success'))
+        // .then(() => res.redirect(`/projects/${req.params.id}`))
+      } 
     }
   })
-  .then(() => console.log('deleted, success'))
   .then(() => res.redirect(`/projects/${req.params.id}`))
 })
 
