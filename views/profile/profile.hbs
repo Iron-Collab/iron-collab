@@ -65,25 +65,26 @@
               {{/if}}
             </ul>
           </div><br>
-
-          <a href="/profile/{{ id }}/edit">Edit profile</a>
+          {{#unless loggedUser}}
+          <button class="btn btn-outline-dark"><a href="/profile/{{ id }}/edit">Edit profile</a></button>
+          {{/unless}}
         </div>
         <div class="col-md-7 mt-2">
 {{/with}}
 
 {{!-- MY PROJECTS --}}
 {{#if project}}
-  <h4 style="text-align: center;">My Projects</h4>
+  <h4 style="text-align: center;">MY PROJECTS</h4>
   {{#each project}}
     <div id="accordionExample" class="accordion shadow">
       <div class="card">
           <div id="heading{{ id }}" class="card-header bg-white shadow-sm border-0">
               <h2 class="mb-0">
-                  <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">{{ title }}</button>
+                  <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold collapsible-link">{{ title }}</button>
               </h2>
           </div>
           <div id="collapse{{ id }}" aria-labelledby="heading{{ id }}" data-parent="#accordionExample" class="collapse show">
-              <div class="card-body p-4">
+              <div class="card-body p-4 height: 80px; overflow: scroll">
                   <p class="font-weight-light m-0">{{ description }}<a href="/projects/{{ id }}"> details</a></p>
               </div>
           </div>
@@ -95,13 +96,13 @@
 {{!-- APPROVED APPLICATIONS --}}
 <br>
 {{#if team}}
-  <h4 style="text-align: center;">Collab Projects</h4>
+  <h4 style="text-align: center;">COLLAB PROJECTS</h4>
   {{#each team}}
     <div id="accordionExample" class="accordion shadow">
       <div class="card">
           <div id="heading{{ id }}" class="card-header bg-white shadow-sm border-0">
               <h2 class="mb-0">
-                  <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">{{ title }}</button>
+                  <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold collapsible-link">{{ title }}</button>
               </h2>
           </div>
           <div id="collapse{{ id }}" aria-labelledby="heading{{ id }}" data-parent="#accordionExample" class="collapse show">
@@ -115,15 +116,17 @@
 {{/if}}
 
 {{!-- PROJECTS I APPLIED TO --}}
+{{#if loggedUser}}
 <br>
 {{#if applied}}
-  <h4 style="text-align: center;">Pending applications</h4>
+  <h4 style="text-align: center;">PENDING APPLICATIONS</h4>
   {{#each applied}}
+
     <div id="accordionExample" class="accordion shadow">
       <div class="card">
           <div id="heading{{ id }}" class="card-header bg-white shadow-sm border-0">
               <h2 class="mb-0">
-                  <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">{{ title }}</button>
+                  <button type="button" data-toggle="collapse" data-target="#collapse{{ id }}" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link text-dark font-weight-bold collapsible-link">{{ title }}</button>
               </h2>
           </div>
           <div id="collapse{{ id }}" aria-labelledby="heading{{ id }}" data-parent="#accordionExample" class="collapse show">
@@ -134,4 +137,5 @@
       </div>    
     </div>  
   {{/each}}
+{{/if}}
 {{/if}}

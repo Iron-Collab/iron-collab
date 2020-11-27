@@ -1,55 +1,49 @@
 {{!-- <h1>Welcome Ironhacker!</h1> --}}
 
 {{#if user}}
-<div class="jumbotron">
-  <h1 class="display-4">Hello, {{ user.name }}! </h1>
-  <p style="font-style:italic; font-size:large"> "Coming together is a beginning, staying together is progress, and
-    wotking together is
-    success." </p> Henry Ford </p>
-  <hr class="my-1">
+<div class="jumbotron" style="height: 20vh; background-color: #f2cc8f; padding: 20px; text-align: center; ">
+  <h1 class="display-5 mt-3">Hello, {{ user.name }}! </h1>
+  <p style="font-size:large"> <i>
+    "Coming together is a beginning, staying together is progress, and
+      working together is success."</i>  Henry Ford </p>
 </div>
 {{else}}
-<div class="jumbotron">
-  <h1 class="display-4">Hello, Ironhacker!</h1>
-  <br>
-  <p class="lead">
-  <p style="font-style:italic; font-size:large"> "Coming together is a beginning, staying together is progress, and
-    wotking together is
-    success." </p> Henry Ford </p>
-  <hr class="my-1">
-
+<div class="jumbotron" style="height: 20vh; background-color: #f2cc8f; padding: 20px; text-align: center; ">
+  <h1 class="display-5 mt-3">Hello, Ironhacker! </h1>
+  <p style="font-size:large"> <i>
+    "Coming together is a beginning, staying together is progress, and
+      working together is success."</i>  Henry Ford </p>
 </div>
 {{/if}}
 
 <section style="margin-left: 50px; margin-right: 50px;" class="d-flex p-2 justify-content-between">
 
   <div class="card" style="width: 40rem;">
-    <img class="card-img-top" src="images/drawing_app.png" alt="Card image cap">
+    <img class="card-img-top" style="width:350px" src="images/drawing_app.png" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">Create a Project</h5>
-      <p class="card-text">Create your very first project with Iron-Collab! Pitch your great Project idea to every
+      <p class="card-text test-justify">Create your very first project with Iron-Collab! Pitch your great Project idea to every
         member of Iron-Collab. If they find your idea interesting they have the abbilty to apply to you and you can
         decide who is becoming your new Partner!</p>
       {{#if user}}
-      <a href="/projects/new" class="btn btn-primary">Creat your First Project</a>
+        <a href="/projects/new" class="btn btn-outline-dark">Create your First Project</a>
       {{else}}
-      <a href="/signup" class="btn btn-primary">Sign up</a>
-
+        <a href="/signup" class="btn btn-outline-dark">Sign up</a>
       {{/if}}
     </div>
   </div>
+
   <div class="card" style="width: 40rem;">
-    <img class="card-img-top" src="images/drawing_team.png" alt="Card image cap">
+    <img class="card-img-top"  src="images/drawing_team.png" alt="Card image cap">
     <div class="card-body">
-      <h5 style="margin-top: 215px;" class="card-title">Ironhackers from all over the World</h5>
-      <p class="card-text"> Ironhackers are spread across the world. With Cohorts in Miami | Barcelona | Berlin | Madrid
+      <h5 class="card-title">Ironhackers from all over the World</h5>
+      <p class="card-text test-justify"> Ironhackers are spread across the world. With Cohorts in Miami | Barcelona | Berlin | Madrid
         and more , you have the possiblity to connect with your local alumni or with people from the other side of the
         World. Create Success. </p>
       {{#if user}}
-      <a href="/projects" class="btn btn-primary">See all available Projects</a>
+        <a href="/projects" class="btn btn-outline-dark">See all available Projects</a>
       {{else}}
-      <a href="/login" class="btn btn-primary">login</a>
-
+        <a href="/login" class="btn btn-outline-dark">Login</a>
       {{/if}}
     </div>
   </div>

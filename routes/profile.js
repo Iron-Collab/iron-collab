@@ -7,23 +7,23 @@ const ensureLogin = require('connect-ensure-login');
 
 // display profile
 router.get('/', ensureLogin.ensureLoggedIn(), async (req, res) => {
+  // console.log('SESSUSER', req.session.passport.user, 'userid', req.user.id)
+  const loggedUser = true;
   const user = await User.findById(req.session.passport.user);
   const project = await Project.find({ owner: [req.session.passport.user] });
-  const applied = await Project.find({ applicants: [req.session.passport.user] });
-  const team = await Project.find({ team: [req.session.passport.user] });
-  res.render('profile/profile', { user, project, applied, team })
+  const applied = await Project.find({ applicants: {$in: [req.session.passport.user]} });
+  const team = await Project.find({ team: {$in: [req.session.passport.user]} });
+  res.render('profile/profile', { user, project, applied, team, loggedUser })
 });
 
-// router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
-
-//   const user = await User.findById(req.params.id);
-//   const project = Project.find({ owner: [req.params.id] });
-//   const applied = Project.find({ applicants: [req.params.id] });
-//   const team = Project.find({ team: [req.params.id] });
-//   const owner = req.session.passport.user == user 
-  
-//   res.render('profile/profile', { user, project, applied, team, owner })
-// });
+router.get('/:id', ensureLogin.ensureLoggedIn(), async (req, res) => {
+  const loggedUser = req.session.passport.user == req.params.id;
+  const user = await User.findById(req.params.id);
+  const project = await Project.find({ owner: [req.params.id] });
+  const applied = await Project.find({ applicants: {$in: [req.params.id]} });
+  const team = await Project.find({ team: {$in: [req.params.id]} });
+  res.render('profile/profile', { user, project, applied, team, loggedUser })
+});
 
 // display edit profile
 router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
@@ -55,63 +55,23 @@ router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 // edit profile
 router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
-  const { email, name, lastName, course, location, website, github, imgPath, publicId } = req.body;
-  const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github })
-  Promise.all([updateProfile])
-  .then(() => res.redirect('/profile'))
-  .catch(error => console.error(error.message));
+  const { email, name, lastName, course, location, website, github } = req.body;
+  if (req.user.profilePicture.publicId) {
+    const deletePhoto = await cloudinary.uploader.destroy(req.user.profilePicture.publicId);
+  }
+  if (req.file) {
+    const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
+  } else {
+    const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github })
+  }
+  res.redirect('/profile');
 })
 
-// edit profile
-// router.post('/:id/edit', uploader.single('photo'), /* async */ (req, res, next) => {
-//   console.log('req.user', req.user, /* 'req.body', req.body, 'req.params', req.params */)
-  // let deletePhoto;
-  // let updateProfile;
-  // const { email, name, lastName, course, location, website, github} = req.body;
-  // console.log('GOOGLE.ID', req.user.googleID)
-  // if (req.user.googleID !== null) {
-  //   try {
-  //     updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github})
-  //   }catch (error) {console.log('ERROR2', error)}
-  //   Promise.all([updateProfile])
-  //   .then(() => {
-  //     res.redirect('/')
-  //   })
-  //   .catch(error => { 
-  //     console.error(error.message)
-  //   });
-  // } else {
-  //   console.log('PUBLIC ID', req.user.profilePicture.publicId)
-  //   try {
-  //     deletePhoto = await cloudinary.uploader.destroy(req.user.profilePicture.publicId);
-  //   }catch (error) {
-  //     console.log('ERROR', error)
-  //   }
-  //   try {
-  //     updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
-  //   }catch (error) {
-  //     console.log('ERROR2', error)
-  //   }
-  //   Promise.all([deletePhoto, updateProfile])
-  //   .then(() => {
-  //     console.log('UPDATED', updateProfile, "DELETE", deletePhoto)
-  //     res.redirect('/')
-  //   })
-  //   .catch(error => { 
-  //     console.error(error.message)
-  //   });
-  // }
-// })
-
-// VERSION THAT WORKS BUT ONLY FOR SIGN UPS
-// // edit profile
+// edit profile VER WITHOUT EDITING PHOTOS
 // router.post('/:id/edit', uploader.single('photo'), async (req, res, next) => {
-//   const { email, name, lastName, course, location, website, github } = req.body;
-//   const deletePhoto = await cloudinary.uploader.destroy(req.user.profilePicture.publicId);
-//   const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github, profilePicture: { imgPath: req.file.path, publicId: req.file.filename} })
-//   Promise.all([deletePhoto, updateProfile])
-//   .then(() => res.redirect('/'))
-//   .catch(error => console.error(error.message));
+//   const { email, name, lastName, course, location, website, github, imgPath, publicId } = req.body;
+//   const updateProfile = await User.findByIdAndUpdate(req.params.id, { email, name, lastName, course, location, website, github })
+//   res.redirect('/profile')
 // })
 
 module.exports = router;
