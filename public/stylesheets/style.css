@@ -332,7 +332,7 @@ a {
   font-size: 1.4rem;
   color: #142d4c;
   text-align: center;
-  animation-name: title-show;
+  animation-name: heading-show;
   animation-duration: 1.5s; }
 
 .projects-container hr {
@@ -377,7 +377,7 @@ a {
   font-weight: 600;
   color: #9fd3c7;
   text-transform: uppercase;
-  animation-name: title-show;
+  animation-name: span-show;
   animation-duration: 1.5s; }
 
 .projects-container a {
@@ -396,13 +396,19 @@ a {
   to {
     margin: 0px; } }
 
+@keyframes heading-show {
+  from {
+    color: #ececec; }
+  to {
+    color: #142d4c; } }
+
 @keyframes p-show {
   from {
     color: #ececec; }
   to {
-    color: #696D7D; } }
+    color: #385170; } }
 
-@keyframes title-show {
+@keyframes span-show {
   from {
     color: #ececec; }
   to {

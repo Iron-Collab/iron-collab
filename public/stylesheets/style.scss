@@ -396,7 +396,7 @@ a {
     font-size: 1.4rem;
     color: #142d4c;
     text-align: center;
-    animation-name: title-show;
+    animation-name: heading-show;
     animation-duration: 1.5s;
 }
 
@@ -445,7 +445,7 @@ a {
   font-weight: 600;
   color: #9fd3c7;
   text-transform: uppercase;
-  animation-name: title-show;
+  animation-name: span-show;
   animation-duration: 1.5s;
 }
 
@@ -466,12 +466,17 @@ a {
   to {margin: 0px;}
 }
 
-@keyframes p-show {
+@keyframes heading-show {
   from {color: #ececec;}
-  to {color: #696D7D;}
+  to {color: #142d4c;}
 }
 
-@keyframes title-show {
+@keyframes p-show {
+  from {color: #ececec;}
+  to {color: #385170;}
+}
+
+@keyframes span-show {
   from {color: #ececec;}
   to {color: #9fd3c7;}
 }
