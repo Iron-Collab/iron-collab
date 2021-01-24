@@ -1,0 +1,82 @@
+<div class="wrapper">
+
+  <div id="sidebar">
+    <nav id="sidebar">
+      <ul class="list-unstyled components mt-5 m-2">
+        <p></p>
+        <li class="active">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Filter</a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li>
+              <form action="/projects" method="POST" class="m-3">
+
+                <label for="searchBar" id="searchBar">Looking for...</label>
+                <select name="searchBar" class="custom-select mb-2" id="searchBar">
+                  <option value="" selected>Choose...</option>
+                  <option value="webdev">Software Developer</option>
+                  <option value="uxui">UX/UI Designer</option>
+                  <option value="data">Data Analyst</option>
+                </select>
+
+                <label for="searchLoc" id="searchLoc">Location:</label>
+                <select name="searchLoc" class="custom-select" id="searchLoc">
+                  <option value="" selected>Choose...</option>
+                  <option value="Berlin">Berlin</option>
+                  <option value="Barcelona">Barcelona</option>
+                  <option value="Miami">Miami</option>
+                </select>
+
+                <div class="mt-3 active" style="margin-left: 45px;">
+                  <button style="width: 110px" class="btn btn-dark btn-sm" type="submit">Filter</button>
+                </div>
+                {{!-- <div class="mt-3 active" style="margin-left: 45px;">
+                  <button style="width: 110px" class="btn btn-outline-dark" type="reset">Reset</button>
+                </div> --}}
+              </form>
+        </li>
+      </ul>
+
+      
+      </li>
+      <li class="mt-5">
+          <a href="/projects"> <button type="button" class="btn btn-outline-dark">Show All Projects</button></a>
+      </li>
+      <li class="mt-2">
+          <a href="/projects/new"> <button type="button" class="btn btn-outline-dark">Add Project</button></a>
+      </li>
+    </nav>
+  </div>
+
+
+  <div class="bd-highlight d-flex p-2 mt-3 flex-row flex-wrap justify-content-around" id="content">
+
+    <h1 class="mt-4">Projects looking for a hire:</h1>
+
+      <div class="projects">
+
+        {{#each allProjects}}
+          <div style="width: 500px; height: 500px" class=" shadow-lg p-4 mt-4 bg-#fff8c1 rounded">
+            <h5><strong>Title:</strong> &nbsp; {{ title }}</h5> <br>
+
+            <h6><strong>Location:</strong> &nbsp; {{ location }}</h6>
+
+            <h6></h6><strong> Looking for: </strong></h6>
+            <li>Software Developer: &nbsp; {{ lookingFor.webdev }} </li>
+            <li>UX | UI Designer: &nbsp; {{ lookingFor.uxui }} </li>
+            <li>Data Analyst: &nbsp; {{ lookingFor.data }} </li>
+            
+            <br><strong>Description: </strong>
+            <h6 style="width:450px; height: 100px" class="overflow-auto mb-2">{{ description }}</h6>
+
+            <p style="font-size: 13px;"><strong>Posted:</strong> &nbsp; {{ createdAt }}</p>
+    
+            <div style="margin-top: 10px;" class="d-flex p-2 justify-content-center align-items-center">
+              <a href="/projects/{{ id }}">
+                <button type="button" class="btn btn-outline-dark btn-sm">Learn More</button>
+              </a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+  </div>
+</div>

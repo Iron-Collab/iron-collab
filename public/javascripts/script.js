@@ -1,17 +1,14 @@
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-    console.log("IronGenerator JS imported successfully!");
-  },
-  false
-);
+// AUTH
+const signUpButton = document.getElementById('signUp');
+const logInButton = document.getElementById('logIn');
+const authContainer = document.getElementById('auth-container');
 
-//filter function
+signUpButton.addEventListener('click', () => {
+  console.log(signUpButton)
+	authContainer.classList.add("right-panel-active");
+});
 
-//sidebar
-
-document.ready(function () {
-  "#sidebarCollapse".on("click", function () {
-    "#sidebar".toggleClass("active");
-  });
+logInButton.addEventListener('click', () => {
+  console.log(logInButton)
+	authContainer.classList.remove("right-panel-active");
 });
