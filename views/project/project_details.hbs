@@ -37,7 +37,7 @@
 
 {{!-- PROJECT DETAILS  --}}
 
-<div class="project-details-container">
+<div class="project-details-container" title={{ id }}>
 
   <div class="project-details-card">
       <h1> {{ title }} </h1>
@@ -69,8 +69,16 @@
 
       {{!-- manage team members --}}
       {{#if team}}
-        <p><span>Team:</span></p>
-        <form action="/projects/{{id}}/team" method="POST">
+        <p><span>Team Members:</span></p>
+
+        {{#each team }}
+            <div class="member">
+                <a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }} </a>
+                <button id="remove" class="btn-small-remove" value={{ id }}>Remove</button>
+            </div>
+        {{/each}}
+
+        {{!-- <form action="/projects/{{id}}/team" method="POST">
           {{#each team }}
             <tr>
               <td>
@@ -84,13 +92,24 @@
           {{/each}}
           
           <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
-        </form><br>
+        </form><br> --}}
       {{/if}}
 
       {{!-- manage applicants --}}
       {{#if applicants}}
         <p><span>Applicants:</span></p>
-        <form action="/projects/{{id}}/applicants" method="POST">
+          {{#each applicants }}
+
+            <div class="member">
+                <a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }} </a>
+                <div class="applicantButtons">
+                  <button id="accept" class="btn-small-accept" value={{ id }}>Accept</button>
+                  <button id="reject" class="btn-small-remove" value={{ id }}>Reject</button>
+                </div>
+            </div>
+          {{/each}}
+
+        {{!-- <form action="/projects/{{id}}/applicants" method="POST">
           {{#each applicants }}
             <div>
               <p><a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }}</a></p>
@@ -102,7 +121,7 @@
           {{/each}}
           <br>
           <button type="submit" class="btn btn-outline-dark btn-sm">Submit</button>
-        </form>
+        </form> --}}
       {{/if}}
 
     </div>
@@ -123,4 +142,4 @@
 </div>
 {{/with}}
 
-
+<script src="/javascripts/projectTeam.js"></script>

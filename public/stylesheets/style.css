@@ -18,10 +18,12 @@ body {
   color: #142d4c;
   font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
   font-weight: 500;
-  width: 120px;
+  display: inline-block;
+  max-width: 150px;
   height: 45px;
   border-radius: 5px;
   margin: 0 10px;
+  padding: 2px 10px;
   text-align: center;
   vertical-align: center;
   letter-spacing: 1px;
@@ -34,10 +36,12 @@ body {
   color: #9fd3c7;
   font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
   font-weight: 500;
-  width: 120px;
+  display: inline-block;
+  max-width: 150px;
   height: 45px;
   border-radius: 5px;
   margin: 0 10px;
+  padding: 2px 10px;
   text-align: center;
   vertical-align: center;
   letter-spacing: 1px;
@@ -50,10 +54,12 @@ body {
   color: #ececec;
   font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
   font-weight: 500;
-  width: 120px;
+  display: inline-block;
+  max-width: 150px;
   height: 45px;
   border-radius: 5px;
   margin: 0 10px;
+  padding: 2px 10px;
   text-align: center;
   vertical-align: center;
   letter-spacing: 1px;
@@ -66,10 +72,12 @@ body {
   color: #142d4c;
   font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
   font-weight: 500;
-  width: 120px;
+  display: inline-block;
+  max-width: 150px;
   height: 45px;
   border-radius: 5px;
   margin: 0 10px;
+  padding: 2px 10px;
   text-align: center;
   vertical-align: center;
   letter-spacing: 1px;
@@ -103,7 +111,7 @@ a {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  background-color: #142d4c;
+  background-color: #385170;
   position: fixed;
   z-index: 5;
   top: 0;
@@ -535,6 +543,42 @@ a {
     color: #ececec; }
   to {
     color: #385170; } }
+
+.member {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-top: 5px; }
+
+.btn-small-remove {
+  background-color: transparent;
+  border: 2px solid #eb596e;
+  color: #eb596e;
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 2px 10px;
+  text-align: center;
+  vertical-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in; }
+
+.btn-small-accept {
+  background-color: transparent;
+  border: 2px solid #9fd3c7;
+  color: #9fd3c7;
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 2px 10px;
+  text-align: center;
+  vertical-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in; }
 
 /* Vertical line */
 .collapsible-link::after {
