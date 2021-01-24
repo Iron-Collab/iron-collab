@@ -412,7 +412,8 @@ a {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  padding: 10px 0; }
 
 .filter-bar {
   display: flex;
