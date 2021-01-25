@@ -1,0 +1,84 @@
+<div class="auth-container" id="auth-container">
+
+  {{!-- SIGN UP --}}
+
+  <div class="form-container sign-up-container">
+		<form class="auth-form" action="/signup" method="POST" enctype="multipart/form-data">
+			<h1>Create Account</h1><br>
+        {{#if message}}
+          <p style="color: #eb596e">{{message}}</p>
+        {{/if}}
+      <input type="email" name="email" placeholder="Email*" required>
+      <input type="password" name="password" placeholder="Password*" required>
+      <input type="text" name="name" placeholder="Name">
+      <input type="text" name="lastName" placeholder="Last name">
+        {{!-- <label for="course">Course*: </label> --}}
+        <select class="dropdown" name="course" required>
+          <option>Course*</option>
+          <option value="Web Development">Web Development</option>
+          <option value="UX/UI Design">UX/UI Design</option>
+          <option value="Data Analytics">Data Analytics</option>
+          <option value="Cybersecurity">Cybersecurity</option>
+        </select>
+        {{!-- <label for="location">Location*: </label> --}}
+        <select class="dropdown" name="location" required>
+          <option>Course location*</option>
+          <option value="Amsterdam">Amsterdam</option>
+          <option value="Barcelona">Barcelona</option>
+          <option value="Berlin">Berlin</option>
+          <option value="Lisbon">Lisbon</option>
+          <option value="Madrid">Madrid</option>
+          <option value="Mexico City">Mexico City</option>
+          <option value="Miami">Miami</option>
+          <option value="Paris">Paris</option>
+          <option value="Sao Paulo">Sao Paulo</option>
+          <option value="Remote">Remote</option>
+        </select>
+      <input type="text" name="website" placeholder="Website">
+      <input type="text" name="github" placeholder="GitHub">
+      <input class="file" type="file" id="profilePicture" name="photo" placeholder="Profile picture"><br><br>
+			<button class="btn-dark" type="submit">Sign Up</button><br>
+      {{!-- <span>or use your email for registration</span> --}}
+      <a href="/google"><img src="images/btn_google_signin_light_normal_web.png" alt="Log in with Google"></a>
+		</form>
+	</div>
+
+  {{!-- LOG IN --}}
+
+	<div class="form-container log-in-container">
+		<form action="/login" method="POST">
+			<h1>Log in</h1><br>
+      {{#if message}}
+        <p style="color: #eb596e">{{message}}</p>
+      {{/if}}
+			<input type="email" name="email" placeholder="Email" />
+			<input type="password" name="password" placeholder="Password" /><br><br>
+			<button class="btn-dark" type="submit">Log In</button><br>
+			{{!-- <span>or use your account</span> --}}
+      <a href="/google"><img src="images/btn_google_signin_light_normal_web.png" alt="Log in with Google"></a>
+		</form>
+	</div>
+
+  {{!-- SIDE PANELS --}}
+
+	<div class="overlay-container">
+		<div class="overlay">
+
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To access the projects please login with your personal info</p><br>
+				<button id="logIn" class="btn-outline-dark">Log In</button>
+			</div>
+
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Ironhacker!</h1>
+				<p>Enter your personal details and start journey with us</p><br>
+				<button id="signUp" class="btn-outline-dark">Sign Up</button>
+			</div>
+
+		</div>
+	</div>
+  
+</div>
+
+<script src="/javascripts/script.js"></script>

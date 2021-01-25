@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Project = require("../models/Project");
 const ensureLogin = require("connect-ensure-login");
+var ObjectId = require('mongoose').Types.ObjectId;
+
 
 // display all projects
 router.get("/", ensureLogin.ensureLoggedIn(), (req, res) => {
@@ -123,42 +125,30 @@ router.post("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
 
 // approving / rejecting applicants
 router.post("/:id/applicants", ensureLogin.ensureLoggedIn(), (req, res) => {
-  console.log(req.params.id)
-  Project.findById(req.params.id)
-  .then(project => {
-    for (let applicant of project.applicants) {
-      if (req.body[applicant] === 'approve') {
-        Project.findByIdAndUpdate(req.params.id, {
-            $push: { team: applicant }, 
-            $pull: { applicants: applicant }
-        })
-        .then(() => {console.log('approved, success')})
-      } else if (req.body[applicant] === 'reject') {
-        Project.findByIdAndUpdate(req.params.id, {
-          $pull: { applicants: applicant }
-        })
-        .then(() => {console.log('rejected, success')})
-      }
-    }
-  })
-  .then(() => {console.log('SUCCESS')})
-  .then(() => res.redirect(`/projects/${req.params.id}`)) 
+
+  if (req.body.action === 'accept') {
+    Project.findByIdAndUpdate(req.params.id, {
+        $push: { team: req.body.memberId }, 
+        $pull: { applicants: req.body.memberId }
+    }, { new: true })
+    .then(() => res.redirect(`/projects/${req.params.id}`)) 
+
+  } else if (req.body.action === 'reject') {
+    Project.findByIdAndUpdate(req.params.id, 
+      { $pull: { applicants: req.body.memberId }}, 
+      { new: true }
+    )
+    .then(() => res.redirect(`/projects/${req.params.id}`)) 
+  }
 })
 
 //deleting team members
 router.post("/:id/team", ensureLogin.ensureLoggedIn(), (req, res) => {
-  Project.findById(req.params.id)
-  .then(project => {
-    for (let member of project.team) {
-      if (req.body[member] == 'delete') {
-        Project.findByIdAndUpdate(req.params.id, {
-            $pull: { team: member }
-        })
-        .then(() => console.log('deleted, success'))
-        // .then(() => res.redirect(`/projects/${req.params.id}`))
-      } 
-    }
-  })
+
+  Project.findByIdAndUpdate(req.params.id, 
+    { $pull: { team: req.body.memberId }}, 
+    { new: true }
+  )
   .then(() => res.redirect(`/projects/${req.params.id}`))
 })
 
@@ -174,5 +164,6 @@ router.post("/", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     })
     .catch(err => console.log(err))
 });
+
 
 module.exports = router;

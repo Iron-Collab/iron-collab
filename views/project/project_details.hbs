@@ -1,145 +1,101 @@
 {{#with project }}
-<!-- Wrapper -->
-<div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar">
-      {{!-- <div class="sidebar-header"><h3>Sidebar</h3></div> --}}
-      
-      <ul class="list-unstyled components mt-5 m-3">
-        {{!-- Apply --}}
-        <li class="mt-3">
-          <a href="/projects"> <button type="button" class="btn btn-outline-dark">Back to All Projects</button></a>
-        </li>
-        {{!-- Apply --}}
-{{!-- {{#unless isOwner}} --}}
-  {{#if canApply}}
-          <li class="mt-3">
-            <a href="/projects/{{ id }}/apply"> <button type="button" class="btn btn-outline-dark">Apply</button></a>
-          </li>
-  {{else}}
-    {{#if isApplicant}}
-            <li class="mt-3">
-              <a href="/projects/{{ id }}/withdraw"> <button type="button" class="btn btn-outline-dark">Withdraw Application</button></a>
-            </li>
-    {{/if}}
-    {{#if isMember}}
-            <li class="mt-3">
-              <a href="/projects/{{ id }}/withdraw"> <button type="button" class="btn btn-outline-dark">Withdraw from the Project</button></a>
-            </li>
-    {{/if}}
-  {{/if}}
-{{!-- {{/unless}} --}}
-        {{!-- Add --}}
-        {{!-- <li class="mt-3">
-          <a href="/projects/new"> <button type="button" class="btn btn-outline-dark">Add Project</button></a>
-        </li> --}}
-        {{!-- Edit --}}
-{{#if isOwner}}
-        <li class="mt-3">
-          <a href="/projects/{{ id }}/edit"> <button type="button" class="btn btn-outline-dark">Edit Project</button></a>
-        </li>
-        {{!-- Delete --}}
-        <li class="mt-3">
-          <a href="/projects/{{ id }}/delete"> <button type="button" class="btn btn-outline-dark">Delete Project</button></a>
-        </li>
-{{/if}}
-        {{!-- Manage applicants --}}
-        {{!-- <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manage Applicants</a>
-        <ul class="collapse list-unstyled" id="pageSubmenu">
-            {{#each applicants}}
-            <li>
-                <a href="/profile/{{ id }}">{{ name }} {{ lastName }}</a>
-            </li>
-            {{/each}}
-        </ul> --}}
-      </ul>
-    </nav>
-    <!-- End sidebar -->
- 
-    <!-- Content -->
-    {{!-- <div class="content"> --}}
-      {{!-- <div class="container shadow-lg p-4 mt-5 mb-5 bg-white rounded"> --}}
 
-      <div class=".container p-4 m-5">
+  <!-- TOOL BAR -->
 
-      {{#if alert}}
-        <div class="alert alert-secondary" role="alert">{{ alert }}</div>
+  <div class="tool-bar">
+
+    <a href="/projects"> <button class="btn-outline-dark">Back to All Projects</button></a>
+    
+    {{!-- Apply --}}
+    {{#if canApply}}
+      <a href="/projects/{{ id }}/apply"> <button class="btn-light">Apply</button></a>
+    
+    {{else}}
+    
+      {{!-- Withdraw Application --}}
+      {{#if isApplicant}}
+        <a href="/projects/{{ id }}/withdraw"> <button class="btn-light">Withdraw Application</button></a>
       {{/if}}
 
-        <h1>Project Details</h1><br>
-        
-          <h5 class="mt-3"><strong>Title: </strong>  {{ title }} </h5>
-          <h5 class="mt-3"><strong>Description: </strong> {{ description }} </h5>
-          <h5 class="mt-3"><strong>Location: </strong> {{ location }} </h5>
-          <h5 class="mt-3"><strong>Looking for: </strong></h5>
-            <ul>
-              {{#if lookingFor.webdev}}
-              <li><h6>Web Developers: {{lookingFor.webdev}} </h6></li>
-              {{/if}}
-              {{#if lookingFor.uxui}}
-              <li><h6>UX/UI Designers: {{lookingFor.uxui}} </h6></li>
-              {{/if}}
-              {{#if lookingFor.data}}
-              <li><h6>Data Analysts: {{lookingFor.data}} </h6></li>
-              {{/if}}
-            </ul>
-          <h5 class="mt-3"><strong>Owner:</strong> <a href="/profile/{{ owner.0.id }}">{{ owner.0.name }} {{ owner.0.lastName }} - {{ owner.0.course }}</a></h5>
-          <h5 class="mt-3"><strong>Deadline:</strong> {{ deadline }} </h5>
-          <h5 class="mt-3"><strong>Status:</strong> {{ status }} </h5>
-{{#if isOwner}}
+      {{!-- Withdraw from the Project --}}
+      {{#if isMember}}
+        <a href="/projects/{{ id }}/withdraw"> <button class="btn-light">Withdraw from the Project</button></a>
+      {{/if}}
 
-          {{#if team}}
-          <h5 class="mt-3 mb-3"><strong>Team:</strong></h5>
-          <form action="/projects/{{id}}/team" method="POST">
-            {{#each team }}
-              <div>
-                <span><a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }} </a></span>
-                <input id="delete{{ id }}" name="{{ id }}" type="radio" value="delete">
-                <label for="delete{{ id }}">Delete</label>
-              </div>
-            {{/each}}
-            <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
-          </form>
-          {{/if}}
-{{!-- add team --}}
+    {{/if}}
 
-          {{#if applicants}}
-          <h5 class="mt-3 mb-3"><strong>Applicants:</strong></h5>
-          <form action="/projects/{{id}}/applicants" method="POST">
-            {{#each applicants }}
-              <div>
-                <span><a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }}</a></span>
-                <input id="approve{{ id }}" name="{{ id }}" type="radio" value="approve" >
-                <label for="approve{{ id }}">Approve</label>
-                <input id="reject{{ id }}" name="{{ id }}" type="radio" value="reject" >
-                <label for="reject{{ id }}">Reject</label>
-              </div>
-            {{/each}}
-            <button type="submit" class="btn btn-outline-dark btn-sm">Submit</button>
-          </form>
-          {{/if}}
-{{/if}}
-            {{!-- <ul>
-              {{#each applicants }}
-                <div class="row">
-                  <div class="col-sm-3"><a href="/profile/{{ id }}">{{ name }} {{ lastName }}</a></div>
-                  <div class="col-sm-2"><button type="" class="btn btn-outline-success btn-sm">Approve</button></div>
-                  <div class="col-sm-2"><button type="" class="btn btn-outline-danger btn-sm">Reject</button></div>
+
+    {{#if isOwner}}
+      {{!-- Edit --}}
+      <a href="/projects/{{ id }}/edit"> <button class="btn-light">Edit Project</button></a>
+
+      {{!-- Delete --}}
+      <a href="/projects/{{ id }}/delete"> <button class="btn-light">Delete Project</button></a>
+    {{/if}}
+
+  </div>
+
+{{!-- PROJECT DETAILS  --}}
+
+<div class="project-details-container" title={{ id }}>
+
+  <div class="project-details-card">
+      <h1> {{ title }} </h1>
+      <p><span>Description: </span> {{ description }} </p>
+      <p><span>Location: </span> {{ location }} </p>
+      <p><span>Looking for: </span></p>
+      <ul>
+        {{#if lookingFor.webdev}}
+        <li>Web Developers: {{lookingFor.webdev}}</li>
+        {{/if}}
+        {{#if lookingFor.uxui}}
+        <li>UX/UI Designers: {{lookingFor.uxui}}</li>
+        {{/if}}
+        {{#if lookingFor.data}}
+        <li>Data Analysts: {{lookingFor.data}}</li>
+        {{/if}}
+      </ul>
+      <p><span>Owner:</span> <a href="/profile/{{ owner.0.id }}">{{ owner.0.name }} {{ owner.0.lastName }} - {{ owner.0.course }}</a></p>
+      <p id="date"><span>Deadline:</span> {{ deadline }} </p>
+      <p><span>Status:</span> {{ status }} </p>
+  </div>
+
+
+  {{!-- MANAGING PROJECT  --}}
+
+  {{#if isOwner}}
+    <div class="project-details-card">
+      <h1>Manage Project</h1><br>
+
+      {{!-- manage team members --}}
+      {{#if team}}
+        <p><span>Team Members:</span></p>
+        {{#each team }}
+            <div class="member">
+                <a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }} </a>
+                <button id="remove" class="btn-small-remove" value={{ id }}>Remove</button>
+            </div>
+        {{/each}}
+      {{/if}}
+
+      {{!-- manage applicants --}}
+      {{#if applicants}}
+        <p><span>Applicants:</span></p>
+          {{#each applicants }}
+            <div class="member">
+                <a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }} </a>
+                <div class="applicantButtons">
+                  <button id="accept" class="btn-small-accept" value={{ id }}>Accept</button>
+                  <button id="reject" class="btn-small-remove" value={{ id }}>Reject</button>
                 </div>
-              {{/each}}
-            </ul> --}}
+            </div>
+          {{/each}}
+      {{/if}}
 
-      {{!-- {{#if message }}
-        <p style="color: red;">You have already applied for this project</p>
-      {{/if}} --}}
-       
-      </div>
-    {{!-- </div> --}}
-    <!-- End content -->
- 
+    </div>
+  {{/if}}
+
 </div>
-<!-- End wrapper -->
 {{/with}}
 
-{{!-- </div> --}}
-
+<script src="/javascripts/projectDetails.js"></script>
