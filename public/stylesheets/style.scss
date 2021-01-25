@@ -544,7 +544,6 @@ a {
 .project-details-card {
   background-color: #e8e8e8;
   width: 70vw;
-  min-height: 250px * 1.618;
   text-align: justify;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   
@@ -631,6 +630,16 @@ a {
   to {color: #385170;}
 }
 
+@keyframes btn-remove-show {
+  from {color: #ececec;}
+  to {color: #eb596e;}
+}
+
+@keyframes btn-accept-show {
+  from {color: #ececec;}
+  to {color: #9fd3c7;}
+}
+
 .member {
   display: flex;
   flex-flow: row nowrap;
@@ -646,13 +655,14 @@ a {
   font-weight: 500;
   display: inline-block;
   border-radius: 5px;
-  // margin: 0 10px;
   padding: 2px 10px;
   text-align: center;
   vertical-align: center;
   letter-spacing: 1px;
 	text-transform: uppercase;
-	transition: transform 80ms ease-in;
+  transition: transform 80ms ease-in;
+  animation-name: btn-remove-show;
+  animation-duration: 1.5s;
 }
 
 .btn-small-accept {
@@ -663,13 +673,14 @@ a {
   font-weight: 500;
   display: inline-block;
   border-radius: 5px;
-  // margin: 0 10px;
   padding: 2px 10px;
   text-align: center;
   vertical-align: center;
   letter-spacing: 1px;
 	text-transform: uppercase;
-	transition: transform 80ms ease-in;
+  transition: transform 80ms ease-in;
+  animation-name: btn-accept-show;
+  animation-duration: 1.5s;
 }
 
 
