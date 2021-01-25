@@ -149,7 +149,7 @@ a {
 
 .big-box {
   width: 100vw;
-  padding: 20px 30px;
+  padding: 40px 30px;
   text-align: center;
   background-color:#9fd3c7; 
   color: #142d4c;
@@ -584,7 +584,7 @@ a {
 
 .project-details-container p {
   font-weight: 100;
-  letter-spacing: -0.25px;
+  // letter-spacing: -0.25px;
   line-height: 1.25;
   font-size: 16px;
   word-wrap: pre-wrap;
@@ -599,7 +599,7 @@ a {
 
 .project-details-container ul, .project-details-container li {
   font-weight: 100;
-  letter-spacing: -0.25px;
+  // letter-spacing: -0.25px;
   line-height: 1.25;
   font-size: 16px;
   word-wrap: pre-wrap;
@@ -686,35 +686,174 @@ a {
 
 // MY PROFILE - ACCORDION
 
-/* Vertical line */
-.collapsible-link::after {
-  content: '';
-  width: 2px;
-  height: 14px;
-  background: #142d4c;
-  position: absolute;
-  top: calc(50% - 7px);
-  right: calc(1rem + 6px);
-  display: block;
-  transition: all 0.3s;
+.profile-container {
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+  margin: 40px auto;
 }
 
-.collapsible-link::before {
-  content: '';
-  width: 14px;
-  height: 2px;
-  background: #142d4c;
-  position: absolute;
-  top: calc(50% - 1px);
-  right: 1rem;
-  display: block;
-  transition: all 0.3s;
+.container-left {
+  width: 40%;
+  height: 75vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 20px;
+  margin: 10px 40px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.collapsible-link[aria-expanded='true']::after {
-  transform: rotate(90deg) translateX(-1px);
+.container-right {
+  width: 60%;
+  display: flex;
+  flex-flow: column nowrap;
+  // padding: 20px;
+  margin: 0 40px;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.collapsible-link[aria-expanded='true']::before {
-  transform: rotate(180deg);
+.profile-list {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+.profile-container h4 {
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.profile-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-item span {
+  margin-left: 10px;
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #142d4c;
+}
+
+.page-title {
+  margin-top: 30px;
+}
+
+.profilePicture {
+  width: 200px;
+  border-radius: 80%;
+}
+
+.icon {
+  width: 30px;
+}
+
+$bg: #ececec;
+$text: #142d4c;
+$gray: #385170;
+$blue: #9fd3c7;
+
+.accordion {
+  .accordion-item {
+    border-bottom: 1px solid $gray;
+    button[aria-expanded='true'] {
+      border-bottom: 1px solid $blue;
+    }
+  }
+  button {
+    position: relative;
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 1em 0;
+    color: $text;
+    font-size: 1.15rem;
+    font-weight: 400;
+    border: none;
+    background: none;
+    outline: none;
+    &:hover, &:focus {
+      cursor: pointer;
+      color: $blue;
+      &::after {
+        cursor: pointer;
+        color: $blue;
+        border: 1px solid $blue;
+      }
+    }
+    .accordion-title {
+      font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #385170;
+      padding: 1em 1.5em 1em 0;
+    }
+    .icon {
+      display: inline-block;
+      position: absolute;
+      top: 18px;
+      right: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid;
+      border-radius: 22px;
+      &::before {
+        display: block;
+        position: absolute;
+        content: '';
+        top: 9px;
+        left: 5px;
+        width: 10px;
+        height: 2px;
+        background: currentColor;
+      }
+      &::after {
+        display: block;
+        position: absolute;
+        content: '';
+        top: 5px;
+        left: 9px;
+        width: 2px;
+        height: 10px;
+        background: currentColor;
+      }
+    }
+  }
+  button[aria-expanded='true'] {
+    color: $blue;
+    .icon {
+      &::after {
+        width: 0;
+      }
+    }
+    + .accordion-content {
+      opacity: 1;
+      max-height: 9em;
+      transition: all 200ms linear;
+      will-change: opacity, max-height;
+    }
+  }
+  .accordion-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: scroll;
+    transition: opacity 200ms linear, max-height 200ms linear;
+    will-change: opacity, max-height;
+    p {
+      font-size: 14px;
+      font-weight: 300;
+      margin: 2em 0;
+    }
+    a {
+      color: #9fd3c7;
+    }
+  }
 }

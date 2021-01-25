@@ -70,36 +70,18 @@
       {{!-- manage team members --}}
       {{#if team}}
         <p><span>Team Members:</span></p>
-
         {{#each team }}
             <div class="member">
                 <a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }} </a>
                 <button id="remove" class="btn-small-remove" value={{ id }}>Remove</button>
             </div>
         {{/each}}
-
-        {{!-- <form action="/projects/{{id}}/team" method="POST">
-          {{#each team }}
-            <tr>
-              <td>
-                <a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }} </a>
-              </td>
-              <td>
-                <input id="delete{{ id }}" name="{{ id }}" type="radio" value="delete">
-                <label for="delete{{ id }}">Delete</label>
-              </td>
-            </tr><br><br>
-          {{/each}}
-          
-          <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
-        </form><br> --}}
       {{/if}}
 
       {{!-- manage applicants --}}
       {{#if applicants}}
         <p><span>Applicants:</span></p>
           {{#each applicants }}
-
             <div class="member">
                 <a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }} </a>
                 <div class="applicantButtons">
@@ -108,38 +90,12 @@
                 </div>
             </div>
           {{/each}}
-
-        {{!-- <form action="/projects/{{id}}/applicants" method="POST">
-          {{#each applicants }}
-            <div>
-              <p><a href="{{ id }}">{{ name }} {{ lastName }} - {{ course }}</a></p>
-              <input id="approve{{ id }}" name="{{ id }}" type="radio" value="approve" >
-              <label for="approve{{ id }}">Approve</label>
-              <input id="reject{{ id }}" name="{{ id }}" type="radio" value="reject" >
-              <label for="reject{{ id }}">Reject</label>
-            </div>
-          {{/each}}
-          <br>
-          <button type="submit" class="btn btn-outline-dark btn-sm">Submit</button>
-        </form> --}}
       {{/if}}
 
     </div>
   {{/if}}
 
-
-          
-            {{!-- <ul>
-              {{#each applicants }}
-                <div class="row">
-                  <div class="col-sm-3"><a href="/profile/{{ id }}">{{ name }} {{ lastName }}</a></div>
-                  <div class="col-sm-2"><button type="" class="btn btn-outline-success btn-sm">Approve</button></div>
-                  <div class="col-sm-2"><button type="" class="btn btn-outline-danger btn-sm">Reject</button></div>
-                </div>
-              {{/each}}
-            </ul> --}}
-
 </div>
 {{/with}}
 
-<script src="/javascripts/projectTeam.js"></script>
+<script src="/javascripts/projectDetails.js"></script>
