@@ -1,64 +1,57 @@
-<div class="container shadow-lg p-4 mt-4 mb-4 bg-white rounded">
-  <h1>Add a Project</h1><br>
-  <form class="" action="/projects/new" method="POST">
+  <h1 class="page-title">Add a Project</h1><br>
 
-    {{!-- TITLE & DEALINE --}}
+  <form class="edit-profile-container" action="/projects/new" method="POST">
+
     <div class="form-row">
-      <div class="col-md-6 mb-3">
         <label for="title"><strong>Title: </strong></label>
         <input id="title" class="form-control" type="text" name="title" >
-      </div>
-  
-      <div class="col-md-6 mb-3">
-        <label for="deadline"><strong>Deadline: </strong></label>
-        <input id="deadline" class="form-control" type="date" name="deadline" >
-      </div>
-    </div><br>
+    </div>
 
-    {{!-- DESCRIPTION --}}
+    <div class="form-row">
+      <label for="deadline"><strong>Deadline: </strong></label>
+      <input id="deadline" class="form-control" type="date" name="deadline" >
+    </div>
+
     <div class="form-row">
         <label for="description"><strong>Description: </strong></label>
         <textarea id="description" class="form-control" type="text" name="description"></textarea>
-    </div><br>
+    </div>
 
-    {{!-- LOCATION & STATUS --}}
     <div class="form-row">
-      <div class="col-md-6 mb-3">
         <label for="location"><strong>Location: </strong></label>
         <select name="location" id="location" class="custom-select">
           {{{ optionsLocation }}}
         </select>
-      </div>
-      <div class="col-md-6 mb-3">
-        <label id="status"><strong>Status:</strong></label>
-        <select name="status" id="status" class="custom-select">
-          <option value="active" selected>Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-      </div>
+    </div>
+    
+    <div class="form-row">
+      <label id="status"><strong>Status:</strong></label>
+      <select name="status" id="status" class="custom-select">
+        <option value="active" selected>Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
     </div>
     <br>
 
-  {{!-- LOOKING FOR --}}
-    <p><strong>Looking for ... to collaborate with:</strong></p>
+    <p><strong>Looking to collaborate with:</strong></p>
     <div class="form-row">
-      <div class="col-4 mb-3">
-        <label for="webdev" {{!-- class="input-group-text" --}}>Web Developer: </label>
-        <input class="form-control" type="number" name="webdev" id="webdev" min="0" max="4" default="0">
+
+      <div class="form-row-collab">
+        <label for="webdev">Web Developer: &nbsp; </label>
+        <input type="number" name="webdev" id="webdev" min="0" max="4" default="0">
       </div>
-      <div class="col-4 mb-3">
-        <label for="uxui" {{!-- class="input-group-text" --}}>UX/UI Designer: </label>
-        <input class="form-control" type="number" name="uxui" id="uxui" min="0" max="4" default="0">
+
+      <div class="form-row-collab">
+        <label for="uxui">UX/UI Designer: &nbsp; </label>
+        <input type="number" name="uxui" id="uxui" min="0" max="4" default="0">
       </div>
-      <div class="col-4 mb-3">
-        <label for="data" {{!-- class="input-group-text" --}}>Data Analyst: </label>
-        <input class="form-control" type="number" name="data" id="data" min="0" max="4" default="0">
+
+      <div class="form-row-collab">
+        <label for="data">Data Analyst: &nbsp; </label>
+        <input type="number" name="data" id="data" min="0" max="4" default="0">
       </div>
+
     </div><br>
-
-    {{!-- TEAM --}}
-
 
     <button class="btn btn-dark" type="submit">Add a project</button>
   </form>
-</div>

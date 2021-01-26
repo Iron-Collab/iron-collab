@@ -118,7 +118,6 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res) => {
 // edit project
 router.post("/:id/edit", ensureLogin.ensureLoggedIn(), (req, res) => {
   const { title, description, deadline, webdev, uxui, data, location, tags, applicants, team } = req.body;
-  // console.log('req.params.id', req.params.id,'req.body', req.body)
   Project.findByIdAndUpdate(req.params.id, { title, description, lookingFor: { webdev, uxui, data }, location, tags, deadline, applicants, team })
   .then(() => res.redirect("/projects"));
 });
