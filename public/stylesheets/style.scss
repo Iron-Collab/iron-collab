@@ -506,6 +506,10 @@ a {
   font-weight: 400;
 }
 
+.btn-outline-filter a, .btn-outline-filter a:visited {
+  color: #142d4c;
+}
+
 .dropdown-filter {
   display: flex;
   flex-flow: row no-wrap;
@@ -745,7 +749,7 @@ a {
 }
 
 .page-title {
-  margin: 30px 0;
+  margin: 70px 0 50px;
 }
 
 .profilePicture {
@@ -866,7 +870,7 @@ $blue: #9fd3c7;
   background-color: #ececec;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	flex-direction: column;
   padding: 0 50px;
   width: 70vw;
@@ -883,7 +887,7 @@ $blue: #9fd3c7;
   margin-bottom: 15px;
 }
 
-.form-row input, .form-row select {
+.form-row input, .form-row select, .form-row textarea {
   font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
   font-weight: 500;
   font-size: 14px;
@@ -893,4 +897,16 @@ $blue: #9fd3c7;
 	padding: 12px 15px;
 	margin: 5px 0;
 	width: 70%;
+}
+
+.form-row-collab {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+}
+
+.form-row-collab input {
+	width: 30%;
 }

@@ -1,9 +1,9 @@
 {{!-- FILTER --}}
 
-<form class="tool-bar" action="/projects" method="POST" class="m-3">
+<form class="tool-bar" action="/projects" method="POST">
   <div class="dropdown-filter">
     <label for="searchBar" id="searchBar">Looking for: &nbsp; </label>
-    <select name="searchBar" class="custom-select mb-2" id="searchBar">
+    <select name="searchBar" id="searchBar">
       <option value="" selected>Choose...</option>
       <option value="webdev">Software Developer</option>
       <option value="uxui">UX/UI Designer</option>
@@ -13,7 +13,7 @@
 
   <div class="dropdown-filter">
       <label for="searchLoc" id="searchLoc">Location: &nbsp; </label>
-      <select name="searchLoc" class="custom-select" id="searchLoc">
+      <select name="searchLoc" id="searchLoc">
         <option value="" selected>Choose...</option>
         <option value="Berlin">Berlin</option>
         <option value="Barcelona">Barcelona</option>
@@ -23,8 +23,8 @@
 
   <button class="btn-light" type="submit">Filter</button>
 
-  <a href="/projects"><button class="btn-outline-dark">View All Projects</button></a>
-  <a href="/projects/new"><button class="btn-outline-dark">Add Project</button></a>
+  <button class="btn-outline-dark"><a href="/projects">View All Projects</a></button>
+  <button class="btn-outline-dark"><a href="/projects/new">Add Project</a></button>
 </form>
 
 {{!-- PROJECTS --}}
