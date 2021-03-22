@@ -777,6 +777,7 @@ a {
   width: 30%; }
 
 .form-row-collab input {
-  width: 30%; }
+  width: 30%;
+  padding: 12px 0 12px 5px; }
 
 /*# sourceMappingURL=style.css.map */
